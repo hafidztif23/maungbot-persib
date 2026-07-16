@@ -1,0 +1,65 @@
+[
+    {
+        "nodes": {
+            "root": {
+                "type": "menu",
+                "message": "Halo! Selamat datang di Maungbot. Silakan pilih menu yang tersedia.",
+                "options": {
+                    "1": "jadwal",
+                    "2": "tiket",
+                    "3": "merchandise",
+                    "4": "pemain",
+                    "5": "keanggotaan",
+                    "6": "stadion",
+                    "7": "sejarah",
+                    "0": "eskalasi"
+                }
+            },
+
+            "jadwal": {
+                "type": "menu",
+                "message": "Berikut adalah jadwal pertandingan Maung Bandung:",
+                "options": {
+                    "1": "jadwal_terdekat",
+                    "2": "jadwal_by_lawan_input",
+                    "3": "jadwal_semua_mendatang",
+                    "4": "jadwal_selesai",
+                    "0": "root"
+                }
+            },
+
+            "jadwal_terdekat": {
+                "type": "leaf",
+                "action": "get_jadwal_terdekat",
+                "params": {},
+                "back_to": "jadwal"
+            },
+
+            "jadwal_by_lawan_input": {
+                "type": "input",
+                "message": "Silakan masukkan nama lawan yang ingin Anda cari jadwalnya:",
+                "action": "get_jadwal_by_lawan",
+                "param_key": "nama_lawan",
+                "back_to": "jadwal"
+            },
+
+            "jadwal_semua_mendatang": {
+                "type": "leaf",
+                "action": "get_jadwal_pertandingan",
+                "params": {
+                    "status": "Akan Datang"
+                },
+                "back_to": "jadwal"
+            },
+
+            "jadwal_selesai": {
+                "type": "leaf",
+                "action": "get_jadwal_pertandingan",
+                "params": {
+                    "status": "Selesai"
+                },
+                "back_to": "jadwal"
+            }
+        }
+    }
+]
