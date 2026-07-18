@@ -424,7 +424,7 @@
                 "message": "Silahkan pilih opsi berikut: ",
                 "options": {
                     "1": "info_stadion_gbla",
-                    "2": "paraturan_penonton",
+                    "2": "peraturan_penonton",
                     "3": "fasilitas_stadion",
                     "4": "info_parkir_stadion",
                     "0": "root"
