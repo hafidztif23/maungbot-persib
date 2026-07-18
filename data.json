@@ -2,7 +2,7 @@
     {
         "nodes": {
             "root": {
-                "type": "menu",
+                "type": "superstate",
                 "message": "Halo! Selamat datang di Maungbot. Silakan pilih menu yang tersedia.",
                 "options": {
                     "1": "jadwal",
@@ -18,7 +18,7 @@
 
             "jadwal": {
                 "id": "1",
-                "type": "menu",
+                "type": "superstate",
                 "message": "Silahkan pilih opsi jadwal pertandingan: ",
                 "options": {
                     "1": "jadwal_terdekat",
@@ -68,7 +68,7 @@
 
             "tiket": {
                 "id": "2",
-                "type": "menu",
+                "type": "superstate",
                 "message": "Silahkan pilih opsi tiket: ",
                 "options": {
                     "1": "stok_tiket_terdekat",
@@ -124,7 +124,7 @@
 
             "merchandise": {
                 "id": "3",
-                "type": "menu",
+                "type": "superstate",
                 "message": "Silahkan pilih opsi merchandise: ",
                 "options": {
                     "1": "check_merch_stock_input",
@@ -135,11 +135,13 @@
 
             "check_merch_stock_input": {
                 "id": "3.1",
-                "type": "menu",
+                "type": "superstate",
                 "message": "Silahkan pilih opsi merchandise: ",
-                "action": "check_merch_stock",
-                "param_key": "item_name",
-                "back_to": "merchandise"
+                "options": {
+                    "1": "Jersey",
+                    "2": "Topi",
+                    "3": "Scarf"
+                }
             },
 
             "cara_pembelian_merchandise": {
@@ -152,7 +154,7 @@
 
             "pemain": {
                 "id": "4",
-                "type": "menu",
+                "type": "superstate",
                 "message": "Silahkan pilih opsi berikut: ",
                 "options": {
                     "1": "pemain_by_nama_input",
@@ -173,7 +175,7 @@
 
             "pemain_by_posisi": {
                 "id": "4.2",
-                "type": "menu",
+                "type": "superstate",
                 "message": "Silahkan pilih posisi pemain: ",
                 "options": {
                     "1": "pemain_by_posisi_gk",
@@ -184,9 +186,49 @@
                 }
             },
 
+            "pemain_by_posisi_gk": {
+                "id": "4.2.1",
+                "type": "leaf",
+                "action": "get_pemain_by_posisi",
+                "params": {
+                    "posisi": "Kiper"
+                },
+                "back_to": "pemain_by_posisi"
+            },
+
+            "pemain_by_posisi_df": {
+                "id": "4.2.2",
+                "type": "leaf",
+                "action": "get_pemain_by_posisi",
+                "params": {
+                    "posisi": "Bek"
+                },
+                "back_to": "pemain_by_posisi"
+            },
+
+            "pemain_by_posisi_mf": {
+                "id": "4.2.3",
+                "type": "leaf",
+                "action": "get_pemain_by_posisi",
+                "params": {
+                    "posisi": "Gelandang"
+                },
+                "back_to": "pemain_by_posisi"
+            },
+
+            "pemain_by_posisi_fw": {
+                "id": "4.2.4",
+                "type": "leaf",
+                "action": "get_pemain_by_posisi",
+                "params": {
+                    "posisi": "Penyerang"
+                },
+                "back_to": "pemain_by_posisi"
+            },
+
             "pemain_by_status": {
                 "id": "4.3",
-                "type": "menu",
+                "type": "superstate",
                 "message": "Silahkan pilih status pemain: ",
                 "options": {
                     "1": "pemain_by_status_aktif",
@@ -196,9 +238,39 @@
                 }
             },
 
+            "pemain_by_status_aktif": {
+                "id": "4.3.1",
+                "type": "leaf",
+                "action": "get_pemain_by_status",
+                "params": {
+                    "status": "Aktif"
+                },
+                "back_to": "pemain_by_status"
+            },
+
+            "pemain_by_status_dipinjam": {
+                "id": "4.3.2",
+                "type": "leaf",
+                "action": "get_pemain_by_status",
+                "params": {
+                    "status": "Dipinjam"
+                },
+                "back_to": "pemain_by_status"
+            },
+
+            "pemain_by_status_cedera": {
+                "id": "4.3.3",
+                "type": "leaf",
+                "action": "get_pemain_by_status",
+                "params": {
+                    "status": "Cedera"
+                },
+                "back_to": "pemain_by_status"
+            },
+
             "keanggotaan": {
                 "id": "5",
-                "type": "menu",
+                "type": "superstate",
                 "message": "Silahkan pilih opsi keanggotaan: ",
                 "options": {
                     "1": "info_membersib",
@@ -210,18 +282,91 @@
 
             "info_membersib": {
                 "id": "5.1",
+                "type": "superstate",
+                "message": "Silahkan pilih opsi info MemberSIB: ",
+                "options": {
+                    "1": "pengertian_membersib",
+                    "2": "benefit_membersib",
+                    "3": "harga_membersib",
+                    "4": "cara_daftar_membersib",
+                    "0": "keanggotaan"
+                }
+            },
+
+            "pengertian_membersib": {
+                "id": "5.1.1",
                 "type": "leaf",
                 "action": "static",
-                "content": "Info MemberSIB:\n\nMemberSIB adalah program keanggotaan resmi Persib Bandung yang memberikan berbagai keuntungan bagi para anggotanya, termasuk akses eksklusif ke konten, diskon merchandise, dan prioritas pembelian tiket.",
-                "back_to": "keanggotaan"
+                "content": "Pengertian MemberSIB:\n\nMemberSIB adalah program keanggotaan digital yang dirancang khusus bagi Bobotoh. Program ini diluncurkan untuk mempererat hubungan antara PERSIB dengan bobotoh dan memberikan berbagai kemudahan.",
+                "back_to": "info_membersib"
+            },
+
+            "benefit_membersib": {
+                "id": "5.1.2",
+                "type": "leaf",
+                "action": "static",
+                "content": "Benefit MemberSIB:\n\n1.Menikmati keterlibatan khusus: Bobotoh akan merasa lebih dekat sebagai bagian dari keluarga besar Persib.\n2. Mendapatkan pengalaman lebih baik: Anggota akan mendapatkan akses eksklusif dan manfaat tertentu, seperti potongan harga hingga 10% dalam pembelian dan reward points yang dapat ditukar dengan hadiah.\n3. Reward Points dan Welcome Pack: Anggota yang membeli paket tahunan akan mendapatkan reward gift berupa poin tambahan dan bingkisan merchandise menarik.",
+                "back_to": "info_membersib"
+            },
+
+            "harga_membersib": {
+                "id": "5.1.3",
+                "type": "leaf",
+                "action": "static",
+                "content": "Harga MemberSIB:\n\nMemberSIB Putih: Rp 9,900/bulan\nMemberSIB Biru: Rp 39,000/bulan.",
+                "back_to": "info_membersib"
+            },
+
+            "cara_daftar_membersib": {
+                "id": "5.1.4",
+                "type": "leaf",
+                "action": "static",
+                "content": "Cara Daftar MemberSIB:\n\n1. Buka Aplikasi PERSIB\n2.Klik tombol \"Benefits\"\n3.Klik tombol \"Beli MemberSIB\"\n4.Pilih durasi langganan\n5.Pilih metode pembayaran.",
+                "back_to": "info_membersib"
             },
 
             "info_passport_persib": {
                 "id": "5.2",
+                "type": "superstate",
+                "message": "Silahkan pilih opsi info Passport Persib: ",
+                "options": {
+                    "1": "pengertian_passport_persib",
+                    "2": "benefit_passport_persib",
+                    "3": "harga_passport_persib",
+                    "4": "cara_daftar_passport_persib"
+                }
+            },
+
+            "pengertian_passport_persib": {
+                "id": "5.2.1",
                 "type": "leaf",
                 "action": "static",
-                "content": "Info Passport Persib:\n\nPassport Persib adalah kartu keanggotaan yang memberikan akses ke berbagai fasilitas dan layanan eksklusif bagi pemegangnya, termasuk akses ke pertandingan, merchandise, dan acara khusus.",
-                "back_to": "keanggotaan"
+                "content": "Pengertian Passport Persib:\n\nPassport Persib adalah program keanggotaan eksklusif yang dirancang khusus bagi Bobotoh. Program ini diluncurkan untuk memberikan layanan yang lebih eksklusif.",
+                "back_to": "info_passport_persib"
+            },
+
+            "benefit_passport_persib": {
+                "id": "5.2.2",
+                "type": "leaf",
+                "action": "static",
+                "content": "Benefit Passport Persib:\n\n1. Tiket VIP: Anda dapat mendapatkan tiket dengan lebih mudah, termasuk tiket VIP untuk pertandingan kandang dan beberapa pertandingan tandang tertentu.\n2. Akses ke Event Spesial: Dapat mengakses acara eksklusif seperti pembelian tiket lebih awal, ngawangkong bareng tamu spesial, dan tur stadion GBLA.\n3. Akses ke Pusat Latihan: Mendapatkan akses ke pusat latihan Persib untuk melihat langsung proses persiapan tim.\n4. Diskon Pembelian Merchandise: Mendapatkan potongan harga hingga 20% untuk semua merchandise resmi Persib.\n5. Diskon Pembelian Saham: Jika IPO Persib dibuka, Anda akan mendapatkan kesempatan untuk membeli saham lebih awal.\n6. Pengakuan Kehormatan: Nama Anda akan diabadikan di dinding mosaik kehormatan Persib melalui program Legacy Wall.\n7. Hadiah Setiap Anniversary: Mendapatkan hadiah spesial di setiap tahun anniversary keanggotaan.",
+                "back_to": "info_passport_persib"
+            },
+
+            "harga_passport_persib": {
+                "id": "5.2.3",
+                "type": "leaf",
+                "action": "static",
+                "content": "Harga Passport Persib: Rp 5.500.000",
+                "back_to": "info_passport_persib"
+            },
+
+            "cara_daftar_passport_persib": {
+                "id": "5.2.4",
+                "type": "leaf",
+                "action": "static",
+                "content": "Cara Daftar Passport Persib:\n\n1. Buka Aplikasi PERSIB\n2.Klik tombol \"Benefits\"\n3.Klik tombol \"Beli Passport Persib\"\n4.Pilih metode pembayaran.",
+                "back_to": "info_passport_persib"
             },
 
             "perbandingan_keanggotaan": {
@@ -234,7 +379,7 @@
 
             "stadion": {
                 "id": "6",
-                "type": "menu",
+                "type": "superstate",
                 "message": "Silahkan pilih opsi berikut: ",
                 "options": {
                     "1": "info_stadion_gbla",
@@ -256,7 +401,7 @@
 
             "peraturan_penonton": {
                 "id": "6.2",
-                "type": "menu",
+                "type": "superstate",
                 "message": "Silahkan pilih opsi peraturan penonton: ",
                 "options": {
                     "1": "peraturan_penonton_boleh",
@@ -283,7 +428,7 @@
 
             "sejarah": {
                 "id": "7",
-                "type": "menu",
+                "type": "superstate",
                 "message": "Silahkan pilih opsi berikut: ",
                 "options": {
                     "1": "sejarah_singkat_persib",
