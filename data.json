@@ -13,7 +13,7 @@
                     "5": "keanggotaan",
                     "6": "stadion",
                     "7": "sejarah",
-                    "0": "eskalasi"
+                    "8": "eskalasi"
                 }
             },
 
@@ -159,7 +159,7 @@
                 "type": "terminal_state",
                 "action": "check_merch_stock",
                 "params": {
-                    "name": "Jersey"
+                    "name": "Jersey Persib 2025"
                 },
                 "back_to": "check_merch_stock"
             },
@@ -169,7 +169,7 @@
                 "type": "terminal_state",
                 "action": "check_merch_stock",
                 "params": {
-                    "name": "Topi"
+                    "name": "Topi Persib"
                 },
                 "back_to": "check_merch_stock"
             },
@@ -179,7 +179,7 @@
                 "type": "terminal_state",
                 "action": "check_merch_stock",
                 "params": {
-                    "name": "Scarf"
+                    "name": "Scarf Maung Bandung"
                 },
                 "back_to": "check_merch_stock"
             },
@@ -703,11 +703,11 @@
             },
 
             "eskalasi": {
-                "id": "0",
+                "id": "8",
                 "type": "transitional_state",
-                "message": "Silakan masukkan pertanyaan atau masalah Anda, dan tim kami akan membantu Anda.",
+                "message": "Silakan masukkan pertanyaan atau masalah Anda, dan tim Customer Service Persib akan membantu Anda.",
                 "action": "create_eskalasi",
-                "params": {},
+                "param_key": "pesan_eskalasi",
                 "back_to": "root"
             }
         }
