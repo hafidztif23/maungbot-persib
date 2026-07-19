@@ -47,17 +47,16 @@ def _format_jadwal(result) -> str:
 
     lines = ["Jadwal Pertandingan Persib:\n"]
     for item in result:
-        lawan = item.get("tim_lawan", "-")
-        tanggal = item.get("tanggal", "-")
-        waktu = item.get("waktu", "-")
-        stadion = item.get("stadion", "-")
+        lawan = item.get("lawan", "-")
+        tanggal_jam = item.get("tanggal_jam", "-")
+        lokasi = item.get("lokasi", "-")
         kompetisi = item.get("kompetisi", "-")
-        status = item.get("status", "-")
+        status = item.get("status_pertandingan", "-")
         lines.append(
-            f" vs {lawan}\n"
-            f"   {tanggal} | {waktu}\n"
-            f"   {stadion}\n"
-            f"   {kompetisi} | Status: {status}"
+            f"vs {lawan}\n"
+            f"{tanggal_jam}\n"
+            f"{lokasi}\n"
+            f"{kompetisi} | Status: {status}"
         )
     return "\n\n".join(lines)
 
@@ -66,23 +65,25 @@ def _format_stok_tiket(result) -> str:
     if not result:
         return "Tidak ada data tiket yang ditemukan."
 
-    if isinstance(result, dict):
-        result = [result]
+    lawan = result.get("lawan", "-")
+    tanggal = result.get("tanggal_jam", "-")
+    status = result.get("status_pertandingan", "-")
+    tribuns = result.get("tribun", [])
+    total = result.get("total_stok", 0)
 
-    lines = ["Stok Tiket Pertandingan:\n"]
-    for item in result:
-        lawan = item.get("tim_lawan", "-")
-        tribun = item.get("tribun", "-")
-        stok = item.get("stok", 0)
-        harga = item.get("harga", 0)
+    lines = [
+        f" Stok Tiket Persib vs {lawan}\n"
+        f" {tanggal} | Status: {status}\n"
+    ]
+    for t in tribuns:
+        nama_tribun = t.get("nama_tribun", "-")
+        stok = t.get("stok", 0)
+        harga = t.get("harga_tiket", 0)
         lines.append(
-            f" vs {lawan}\n"
-            f" Tribun  : {tribun}\n"
-            f" Stok    : {stok} tiket\n"
-            f" Harga   : Rp {harga:,.0f}"
+            f"   {nama_tribun}: {stok} tiket — Rp {harga:,.0f}"
         )
-    return "\n\n".join(lines)
-
+    lines.append(f"\n Total stok: {total} tiket")
+    return "\n".join(lines)
 
 def _format_harga_tiket(result) -> str:
     if not result:
@@ -93,8 +94,8 @@ def _format_harga_tiket(result) -> str:
 
     lines = ["Daftar Harga Tiket Persib:\n"]
     for item in result:
-        tribun = item.get("tribun", "-")
-        harga = item.get("harga", 0)
+        tribun = item.get("nama_tribun", item.get("tribun", "-"))
+        harga = item.get("harga_tiket", item.get("harga", 0))
         lines.append(f"   {tribun}: Rp {harga:,.0f}")
     return "\n".join(lines)
 
@@ -124,7 +125,7 @@ def _format_merch_all(result) -> str:
         name = item.get("name", "-")
         stock = item.get("stock", 0)
         harga = item.get("harga", 0)
-        status = "Tersedia" if stock > 0 else "Tidak tersedia"
+        status = "Tersedia" if stock > 0 else "Habis"
         lines.append(f"   {status} {name} — Rp {harga:,.0f} (stok: {stock})")
     return "\n".join(lines)
 
@@ -138,9 +139,9 @@ def _format_pemain(result) -> str:
 
     lines = ["Data Pemain Persib:\n"]
     for item in result:
-        nama = item.get("name", "-")
+        nama = item.get("nama_pemain", "-")
         posisi = item.get("posisi", "-")
-        no_punggung = item.get("no_punggung", "-")
+        no_punggung = item.get("nomor_punggung", "-")
         status = item.get("status", "-")
         lines.append(
             f"   {no_punggung}. {nama}\n"

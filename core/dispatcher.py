@@ -24,11 +24,9 @@ def _route(action: str, params: dict, id_account: int) -> dict | list | str | No
     if action == "get_jadwal_terdekat":
         return db.get_jadwal_terdekat()
 
-    if action == "get_jadwal_mendatang":
-        return db.get_jadwal_pertandingan(status="Akan Datang")
-
-    if action == "get_jadwal_selesai":
-        return db.get_jadwal_pertandingan(status="Selesai")
+    if action == "get_jadwal_pertandingan":
+        status = params.get("status")
+        return db.get_jadwal_pertandingan(status=status)
 
     if action == "get_jadwal_by_lawan":
         nama_lawan = params.get("nama_lawan", "").strip()
@@ -49,7 +47,7 @@ def _route(action: str, params: dict, id_account: int) -> dict | list | str | No
         return db.get_all_merch()
 
     if action == "get_pemain_by_nama":
-        nama = params.get("nama_pemain", "").strip()
+        nama = params.get("nama_pemain", params.get("nama", "")).strip()
         return db.get_pemain_by_nama(nama)
 
     if action == "get_pemain_by_posisi":

@@ -343,3 +343,20 @@ def get_last_human_history_id(id_account: int) -> int | None:
             {"id_account": id_account}
         ).fetchone()
     return row[0] if row else None
+
+def handle_eskalasi(pesan: str, id_account: int) -> dict:
+    """Simpan pesan ke chat_history lalu buat tiket eskalasi."""
+    with engine.begin() as conn:
+        conn.execute(
+            text("""
+                INSERT INTO chat_history (session_id, role, content, created_at)
+                VALUES (:session_id, 'human', :content, NOW())
+            """),
+            {"session_id": id_account, "content": pesan}
+        )
+    id_history = get_last_human_history_id(id_account)
+    if not id_history:
+        return {"status": "error", "message": "Gagal menyimpan pesan eskalasi."}
+
+    create_eskalasi(id_history)
+    return {"status": "ok"}
