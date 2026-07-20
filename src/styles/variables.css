@@ -1,0 +1,13 @@
+:root {
+  --primary-blue: #2563EB;
+  --sidebar-bg: #0F172A;
+  --card-bg: rgba(30, 41, 59, 0.6);
+  --white: #ffffff;
+  --text-secondary: #9CA3AF;
+  --button-primary: #2563EB;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --transition: 0.2s ease-in-out;
+}

@@ -47,16 +47,22 @@ def _format_jadwal(result) -> str:
 
     lines = ["Jadwal Pertandingan Persib:\n"]
     for item in result:
-        lawan = item.get("tim_lawan", "-")
-        tanggal = item.get("tanggal", "-")
-        waktu = item.get("waktu", "-")
-        stadion = item.get("stadion", "-")
+        lawan = item.get("lawan") or item.get("tim_lawan") or "-"
+        tanggal_jam = item.get("tanggal_jam")
+        if not tanggal_jam:
+            tanggal = item.get("tanggal", "-")
+            waktu = item.get("waktu", "-")
+            waktu_str = f"{tanggal} | {waktu}"
+        else:
+            waktu_str = tanggal_jam
+
+        lokasi = item.get("lokasi") or item.get("stadion") or "-"
         kompetisi = item.get("kompetisi", "-")
-        status = item.get("status", "-")
+        status = item.get("status_pertandingan") or item.get("status") or "-"
         lines.append(
             f" vs {lawan}\n"
-            f"   {tanggal} | {waktu}\n"
-            f"   {stadion}\n"
+            f"   {waktu_str}\n"
+            f"   {lokasi}\n"
             f"   {kompetisi} | Status: {status}"
         )
     return "\n\n".join(lines)
@@ -71,16 +77,21 @@ def _format_stok_tiket(result) -> str:
 
     lines = ["Stok Tiket Pertandingan:\n"]
     for item in result:
-        lawan = item.get("tim_lawan", "-")
-        tribun = item.get("tribun", "-")
-        stok = item.get("stok", 0)
-        harga = item.get("harga", 0)
-        lines.append(
-            f" vs {lawan}\n"
-            f" Tribun  : {tribun}\n"
-            f" Stok    : {stok} tiket\n"
-            f" Harga   : Rp {harga:,.0f}"
-        )
+        lawan = item.get("lawan") or item.get("tim_lawan") or "-"
+        tanggal_jam = item.get("tanggal_jam") or "-"
+        status = item.get("status_pertandingan") or "-"
+        lines.append(f" vs {lawan} ({tanggal_jam}) [{status}]")
+        
+        tribun_list = item.get("tribun", [])
+        if isinstance(tribun_list, list):
+            for t in tribun_list:
+                nama_t = t.get("nama_tribun") or t.get("tribun") or "-"
+                stok = t.get("stok", 0)
+                harga = t.get("harga_tiket") or t.get("harga") or 0
+                lines.append(f"   Tribun: {nama_t} | Stok: {stok} | Rp {harga:,.0f}")
+        else:
+            lines.append(f"   Tribun: {tribun_list} | Stok: {item.get('stok', 0)} | Rp {item.get('harga', 0):,.0f}")
+
     return "\n\n".join(lines)
 
 
