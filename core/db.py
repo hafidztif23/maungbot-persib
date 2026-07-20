@@ -78,7 +78,7 @@ def get_jadwal_pertandingan(status: str = None):
                 text("""
                     SELECT id_jadwal, lawan, tanggal_jam, lokasi, kompetisi, status_pertandingan
                     FROM jadwal_pertandingan
-                    WHERE status_pertandingan = :status
+                    WHERE LOWER(CAST(status_pertandingan AS text)) = LOWER(:status)
                     ORDER BY tanggal_jam ASC
                 """),
                 {"status": status}

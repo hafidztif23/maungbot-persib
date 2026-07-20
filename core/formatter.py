@@ -16,7 +16,7 @@ def format_response(action: str, result: Any) -> str:
         )
 
     if action in ("get_jadwal_terdekat", "get_jadwal_mendatang",
-                  "get_jadwal_selesai", "get_jadwal_by_lawan"):
+                  "get_jadwal_selesai", "get_jadwal_by_lawan", "get_jadwal_pertandingan"):
         return _format_jadwal(result)
 
     if action in ("get_stok_tiket_terdekat", "get_stok_tiket_by_lawan"):
@@ -45,8 +45,8 @@ def _format_jadwal(result) -> str:
     if isinstance(result, dict):
         result = [result]
 
-    lines = ["Jadwal Pertandingan Persib:\n"]
-    for item in result:
+    lines = ["📅 Jadwal Pertandingan Persib Bandung:\n"]
+    for idx, item in enumerate(result, 1):
         lawan = item.get("lawan") or item.get("tim_lawan") or "-"
         tanggal_jam = item.get("tanggal_jam")
         if not tanggal_jam:
@@ -60,10 +60,11 @@ def _format_jadwal(result) -> str:
         kompetisi = item.get("kompetisi", "-")
         status = item.get("status_pertandingan") or item.get("status") or "-"
         lines.append(
-            f" vs {lawan}\n"
-            f"   {waktu_str}\n"
-            f"   {lokasi}\n"
-            f"   {kompetisi} | Status: {status}"
+            f"{idx}. ⚽ PERSIB vs {lawan}\n"
+            f"   📅 Waktu    : {waktu_str}\n"
+            f"   🏟️ Stadion  : {lokasi}\n"
+            f"   🏆 Kompetisi: {kompetisi}\n"
+            f"   📌 Status   : {status}"
         )
     return "\n\n".join(lines)
 
@@ -147,14 +148,17 @@ def _format_pemain(result) -> str:
     if isinstance(result, dict):
         result = [result]
 
-    lines = ["Data Pemain Persib:\n"]
+    lines = ["🏃 Data Pemain Persib Bandung:\n"]
     for item in result:
-        nama = item.get("name", "-")
+        nama = item.get("nama_pemain") or item.get("nama") or item.get("name") or "-"
         posisi = item.get("posisi", "-")
-        no_punggung = item.get("no_punggung", "-")
+        no_punggung = item.get("nomor_punggung") or item.get("no_punggung") or "-"
+        kewarganegaraan = item.get("kewarganegaraan", "")
         status = item.get("status", "-")
+        
+        kwg_str = f" ({kewarganegaraan})" if kewarganegaraan else ""
         lines.append(
-            f"   {no_punggung}. {nama}\n"
+            f"   #{no_punggung} {nama}{kwg_str}\n"
             f"      Posisi : {posisi} | Status: {status}"
         )
     return "\n\n".join(lines)

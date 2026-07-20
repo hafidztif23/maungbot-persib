@@ -24,11 +24,9 @@ def _route(action: str, params: dict, id_account: int) -> dict | list | str | No
     if action == "get_jadwal_terdekat":
         return db.get_jadwal_terdekat()
 
-    if action == "get_jadwal_mendatang":
-        return db.get_jadwal_pertandingan(status="Akan Datang")
-
-    if action == "get_jadwal_selesai":
-        return db.get_jadwal_pertandingan(status="Selesai")
+    if action in ("get_jadwal_pertandingan", "get_jadwal_mendatang", "get_jadwal_selesai"):
+        status = params.get("status")
+        return db.get_jadwal_pertandingan(status=status)
 
     if action == "get_jadwal_by_lawan":
         nama_lawan = params.get("nama_lawan", "").strip()
@@ -36,6 +34,15 @@ def _route(action: str, params: dict, id_account: int) -> dict | list | str | No
 
     if action == "get_stok_tiket_terdekat":
         return db.get_stok_tiket_terdekat()
+
+    if action in ("get_harga_tiket_by_tribun", "get_harga_tiket"):
+        res = db.get_stok_tiket_terdekat()
+        if res and isinstance(res, dict) and "tribun" in res:
+            return [
+                {"tribun": t["nama_tribun"], "harga": t["harga_tiket"]}
+                for t in res["tribun"]
+            ]
+        return res
 
     if action == "get_stok_tiket_by_lawan":
         nama_lawan = params.get("nama_lawan", "").strip()

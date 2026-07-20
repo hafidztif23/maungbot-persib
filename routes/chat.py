@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from core.engine import process_input, get_initial_message
-from core.session import get_session
+from core.session import get_session, reset_session
 from core.dependencies import get_current_account
 
 router = APIRouter(prefix="/chat", tags=["Chat"])
@@ -40,6 +40,7 @@ def start_chat(
     current_user: dict = Depends(get_current_account),
 ):
     id_account = current_user["id_account"]
+    reset_session(id_account)
     response = get_initial_message()
     session = get_session(id_account)
 
