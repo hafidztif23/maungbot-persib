@@ -20,7 +20,7 @@
             "jadwal": {
                 "id": "1",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi jadwal pertandingan:\n\n1. Jadwal Pertandingan Terdekat\n2. Jadwal Pertandingan Berdasarkan Nama Lawan\n3. List Jadwal Pertandingan Mendatang\n4. Jadwal Pertandingan Selesai",
+                "message": "Silahkan pilih opsi jadwal pertandingan:\n\n1. Jadwal Pertandingan Terdekat\n2. Jadwal Pertandingan Berdasarkan Nama Lawan\n3. List Jadwal Pertandingan Mendatang\n4. Jadwal Pertandingan Selesai\n0. Kembali",
                 "options": {
                     "1": "jadwal_terdekat",
                     "2": "jadwal_by_lawan_input",
@@ -70,7 +70,7 @@
             "tiket": {
                 "id": "2",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi tiket: 1. Stok Tiket Pertandingan Terdekat\n2. Stok Tiket Pertandingan Berdasarkan Nama Lawan\n3. Harga Tiket Berdasarkan Tribun\n4. Cara Beli Tiket\n5. Kebijakan Pembatalan Tiket\n6. Kebijakan E-Voucher",
+                "message": "Silahkan pilih opsi tiket:\n\n1. Stok Tiket Pertandingan Terdekat\n2. Stok Tiket Pertandingan Berdasarkan Nama Lawan\n3. Harga Tiket Berdasarkan Tribun\n4. Cara Beli Tiket\n5. Kebijakan Pembatalan Tiket\n6. Kebijakan E-Voucher\n0. Kembali",
                 "options": {
                     "1": "stok_tiket_terdekat",
                     "2": "stok_tiket_by_lawan_input",
@@ -134,7 +134,7 @@
             "merchandise": {
                 "id": "3",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi merchandise:\n\n1. Cek Stok Merchandise\n2. Cara Pembelian Merchandise",
+                "message": "Silahkan pilih opsi merchandise:\n\n1. Cek Stok Merchandise\n2. Cara Pembelian Merchandise\n0. Kembali",
                 "options": {
                     "1": "check_merch_stock",
                     "2": "cara_pembelian_merchandise",
@@ -145,7 +145,7 @@
             "check_merch_stock": {
                 "id": "3.1",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi merchandise:\n\n1. Jersey Persib 2025\n2. Topi Persib\n3. Scarf Maung Bandung",
+                "message": "Silahkan pilih opsi merchandise:\n\n1. Jersey Persib 2025\n2. Topi Persib\n3. Scarf Maung Bandung\n0. Kembali",
                 "options": {
                     "1": "merch_jersey",
                     "2": "merch_topi",
@@ -195,7 +195,7 @@
             "pemain": {
                 "id": "4",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi berikut:\n\n1. Pemain Berdasarkan Nama\n2. List Pemain Berdasarkan Posisi\n3. List Pemain Berdasarkan Status",
+                "message": "Silahkan pilih opsi berikut:\n\n1. Pemain Berdasarkan Nama\n2. List Pemain Berdasarkan Posisi\n3. List Pemain Berdasarkan Status\n0. Kembali",
                 "options": {
                     "1": "pemain_by_nama_input",
                     "2": "pemain_by_posisi",
@@ -216,7 +216,7 @@
             "pemain_by_posisi": {
                 "id": "4.2",
                 "type": "superstate",
-                "message": "Silahkan pilih posisi pemain:\n\n1. Kiper\n2. Bek\n3. Gelandang\n4. Penyerang",
+                "message": "Silahkan pilih posisi pemain:\n\n1. Kiper\n2. Bek\n3. Gelandang\n4. Penyerang\n0. Kembali",
                 "options": {
                     "1": "pemain_by_posisi_gk",
                     "2": "pemain_by_posisi_df",
@@ -269,7 +269,7 @@
             "pemain_by_status": {
                 "id": "4.3",
                 "type": "superstate",
-                "message": "Silahkan pilih status pemain:\n\n1. Aktif\n2. Dipinjam ke Klub Lain\n3. Cedera",
+                "message": "Silahkan pilih status pemain:\n\n1. Aktif\n2. Dipinjam ke Klub Lain\n3. Cedera\n0. Kembali",
                 "options": {
                     "1": "pemain_by_status_aktif",
                     "2": "pemain_by_status_dipinjam",
@@ -311,7 +311,7 @@
             "keanggotaan": {
                 "id": "5",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi keanggotaan:\n\n1. Informasi MemberSIB\n2. Informasi Passport Persib\n3. Perbandingan MemberSIB dan Passport Persib",
+                "message": "Silahkan pilih opsi keanggotaan:\n\n1. Informasi MemberSIB\n2. Informasi Passport Persib\n3. Perbandingan MemberSIB dan Passport Persib\n0. Kembali",
                 "options": {
                     "1": "info_membersib",
                     "2": "info_passport_persib",
@@ -323,7 +323,7 @@
             "info_membersib": {
                 "id": "5.1",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi info MemberSIB:\n\n1. Pengertian\n2. Benefit\n3. Harga\n4. Cara Daftar",
+                "message": "Silahkan pilih opsi info MemberSIB:\n\n1. Pengertian\n2. Benefit\n3. Harga\n4. Cara Daftar\n0. Kembali",
                 "options": {
                     "1": "pengertian_membersib",
                     "2": "benefit_membersib",
@@ -368,7 +368,7 @@
             "info_passport_persib": {
                 "id": "5.2",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi info Passport Persib: \n\n1. Pengertian\n2. Benefit\n3. Harga\n4. Cara Daftar",
+                "message": "Silahkan pilih opsi info Passport Persib: \n\n1. Pengertian\n2. Benefit\n3. Harga\n4. Cara Daftar\n0. Kembali",
                 "options": {
                     "1": "pengertian_passport_persib",
                     "2": "benefit_passport_persib",
@@ -421,7 +421,7 @@
             "stadion": {
                 "id": "6",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi berikut:\n\n1. Informasi Singkat Stadion GBLA\n2. Peraturan Penonton\n3. Fasilitas Stadion GBLA\n4. Informasi Parkir di Stadion GBLA",
+                "message": "Silahkan pilih opsi berikut:\n\n1. Informasi Singkat Stadion GBLA\n2. Peraturan Penonton\n3. Fasilitas Stadion GBLA\n4. Informasi Parkir di Stadion GBLA\n0. Kembali",
                 "options": {
                     "1": "info_stadion_gbla",
                     "2": "peraturan_penonton",
@@ -442,7 +442,7 @@
             "peraturan_penonton": {
                 "id": "6.2",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi peraturan penonton:\n\n1. Peraturan Penonton: Boleh\n2. Peraturan Penonton: Dilarang",
+                "message": "Silahkan pilih opsi peraturan penonton:\n\n1. Peraturan Penonton: Boleh\n2. Peraturan Penonton: Dilarang\n0. Kembali",
                 "options": {
                     "1": "peraturan_penonton_boleh",
                     "2": "peraturan_penonton_dilarang",
@@ -469,7 +469,7 @@
             "fasilitas_stadion": {
                 "id": "6.3",
                 "type": "superstate",
-                "message": "Silahkan pilih fasilitas yang ingin Anda ketahui:\n\n1. Fasilitas Tribun\n\n2. Fasilitas Toilet\n3. Fasilitas Ruang Ganti Pemain\n4. Fasilitas Ruang Medis",
+                "message": "Silahkan pilih fasilitas yang ingin Anda ketahui:\n\n1. Fasilitas Tribun\n\n2. Fasilitas Toilet\n3. Fasilitas Ruang Ganti Pemain\n4. Fasilitas Ruang Medis\n0. Kembali",
                 "options": {
                     "1": "fasilitas_tribun",
                     "2": "fasilitas_toilet",
@@ -482,7 +482,7 @@
             "fasilitas_tribun": {
                 "id": "6.3.1",
                 "type": "superstate",
-                "message": "Silahkan pilih tribun mana yang ingin anda ketahui:\n\n1. Tribun Timur\n2. Tribun Utara\n3. Tribun Selatan\n4. Tribun VIP Barat Utara dan Barat Selatan\n5. VIP Bawah\n6. Corporate Box",
+                "message": "Silahkan pilih tribun mana yang ingin anda ketahui:\n\n1. Tribun Timur\n2. Tribun Utara\n3. Tribun Selatan\n4. Tribun VIP Barat Utara dan Barat Selatan\n5. VIP Bawah\n6. Corporate Box\n0. Kembali",
                 "options": {
                     "1": "fasilitas_tribun_timur",
                     "2": "fasilitas_tribun_utara",
@@ -553,7 +553,7 @@
             "fasilitas_ruang_ganti_pemain": {
                 "id": "6.3.3",
                 "type": "superstate",
-                "message": "Silahkan pilih ruang ganti:\n\n1. Ruang Ganti (Home)\n2. Ruang Ganti (Away)",
+                "message": "Silahkan pilih ruang ganti:\n\n1. Ruang Ganti (Home)\n2. Ruang Ganti (Away)\n0. Kembali",
                 "options": {
                     "1": "ruang_ganti_home",
                     "2": "ruang_ganti_away",
@@ -588,7 +588,7 @@
             "info_parkir_stadion": {
                 "id": "6.4",
                 "type":"superstate",
-                "message": "Silahkan pilih opsi berikut:\n\n1. Area Parkir Utara - Barat\n2. Area Parkir Timur - Selatan\n3. Area Parkir VVIP\n4. Metode Pembayaran Parkir",
+                "message": "Silahkan pilih opsi berikut:\n\n1. Area Parkir Utara - Barat\n2. Area Parkir Timur - Selatan\n3. Area Parkir VVIP\n4. Metode Pembayaran Parkir\n0. Kembali",
                 "options": {
                     "1": "parkir_utara_barat",
                     "2": "parkir_timur_selatan",
@@ -633,7 +633,7 @@
             "sejarah": {
                 "id": "7",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi berikut:\n\n1. Sejarah Singkat\n2. Sejarah Era Perserikatan (1930)\n3. Sejarah Era Liga Indonesia (1994)\n4. Sejarah Era Liga Super (2010)\n5. Sejarah Era Liga 1 (2018)\n6. Daftar Gelar Juara Persib\n7. Daftar Pemain Legenda Persib",
+                "message": "Silahkan pilih opsi berikut:\n\n1. Sejarah Singkat\n2. Sejarah Era Perserikatan (1930)\n3. Sejarah Era Liga Indonesia (1994)\n4. Sejarah Era Liga Super (2010)\n5. Sejarah Era Liga 1 (2018)\n6. Daftar Gelar Juara Persib\n7. Daftar Pemain Legenda Persib\n0. Kembali",
                 "options": {
                     "1": "sejarah_singkat_persib",
                     "2": "sejarah_perserikatan",
