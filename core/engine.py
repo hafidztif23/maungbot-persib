@@ -71,7 +71,7 @@ def _execute_node(
 ) -> str:
     node_type = node["type"]
  
-    if node_type == "superstate":
+    if node_type in ("superstate", "substate"):
         return _execute_superstate(id_account, node_id, node)
  
     if node_type == "terminal_state":

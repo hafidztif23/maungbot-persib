@@ -9,6 +9,7 @@ _nodes: dict = {}
 
 REQUIRED_FIELDS = {
     "superstate": ["message", "options"],
+    "substate": ["message", "options"],
     "terminal_state": ["action", "back_to"],
     "transitional_state": ["message", "action", "param_key", "back_to"],
 }
@@ -73,8 +74,8 @@ def _validate(nodes: dict) -> None:
                     f"Node '{node_id}' (type: {node_type}) tidak memiliki field wajib: '{field}'"
                 )
 
-        # 3. Referential integrity untuk superstate
-        if node_type == "superstate":
+        # 3. Referential integrity untuk superstate dan substate
+        if node_type in ("superstate", "substate"):
             options = node.get("options", {})
             for choice, target in options.items():
                 if target not in nodes:
