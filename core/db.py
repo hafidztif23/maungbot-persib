@@ -50,6 +50,7 @@ def check_merch_stock(item_name: str):
         ).mappings().fetchone()
     if rows:
         return {
+            "name": rows["name"],
             "stock": rows["stock"],
             "harga": rows.get("harga_merchandise") or 0
             }
@@ -308,38 +309,3 @@ def get_stok_tiket_by_lawan(nama_lawan: str):
         return None
 
     return get_stok_tiket(row["id_jadwal"])
-
-def create_eskalasi(id_history: int) -> int:
-    """
-    Simpan satu tiket eskalasi ke tabel eskalasi.
-    Mengembalikan id_fallback yang baru dibuat.
-    """
-    # Gunakan engine.begin()
-    with engine.begin() as conn:
-        result = conn.execute(
-            text("""
-                INSERT INTO eskalasi (id_history)
-                VALUES (:id_history)
-                RETURNING id_fallback
-            """),
-            {"id_history": id_history}
-        )
-        return result.fetchone()[0]
- 
- 
-def get_last_human_history_id(id_account: int) -> int | None:
-    """
-    Ambil id terbaru dari chat_history milik id_account dengan role = 'human'.
-    Digunakan setelah save_message() untuk mendapatkan id_history bagi eskalasi.
-    """
-    with engine.connect() as conn:
-        row = conn.execute(
-            text("""
-                SELECT id FROM chat_history
-                WHERE session_id = :id_account AND role = 'human'
-                ORDER BY created_at DESC
-                LIMIT 1
-            """),
-            {"id_account": id_account}
-        ).fetchone()
-    return row[0] if row else None

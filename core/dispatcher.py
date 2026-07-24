@@ -15,12 +15,6 @@ def _route(action: str, params: dict, id_account: int) -> dict | list | str | No
     if action == "static":
         return params.get("content", "")
 
-    if action == "create_eskalasi":
-        pesan = params.get("pesan_eskalasi", "").strip()
-        if not pesan:
-            return {"status": "error", "message": "Pesan tidak boleh kosong."}
-        return db.handle_eskalasi(pesan, id_account)
-
     if action == "get_jadwal_terdekat":
         return db.get_jadwal_terdekat()
 

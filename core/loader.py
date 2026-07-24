@@ -2,6 +2,10 @@ import json
 import logging
 from pathlib import Path
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - [%(levelname)s] - %(message)s"
+)
 logger = logging.getLogger(__name__)
 
 # Global variable — dibaca sekali saat startup
@@ -40,7 +44,7 @@ def load_tree(path: str = "data.json") -> dict:
     _validate(nodes)
 
     _nodes = nodes
-    logger.info(f"FSM tree berhasil dimuat: {len(nodes)} node")
+    logger.info(f"Total {len(nodes)} node berhasil di-load dan divalidasi.")
     return _nodes
 
 
@@ -74,8 +78,8 @@ def _validate(nodes: dict) -> None:
                     f"Node '{node_id}' (type: {node_type}) tidak memiliki field wajib: '{field}'"
                 )
 
-        # 3. Referential integrity untuk superstate dan substate
-        if node_type in ("superstate", "substate"):
+        # 3. Referential integrity untuk superstate
+        if node_type in ("superstate"):
             options = node.get("options", {})
             for choice, target in options.items():
                 if target not in nodes:

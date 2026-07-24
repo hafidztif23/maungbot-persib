@@ -7,14 +7,6 @@ def format_response(action: str, result: Any) -> str:
     if action == "static":
         return str(result)
 
-    if action == "create_eskalasi":
-        if isinstance(result, dict) and result.get("status") == "error":
-            return f"{result['message']}"
-        return (
-            "Pertanyaan anda telah kami teruskan ke tim CS Persib Bandung.\n"
-            "Kami akan menghubungi anda secepatnya."
-        )
-
     if action in ("get_jadwal_terdekat", "get_jadwal_mendatang",
                   "get_jadwal_selesai", "get_jadwal_by_lawan", "get_jadwal_pertandingan"):
         return _format_jadwal(result)

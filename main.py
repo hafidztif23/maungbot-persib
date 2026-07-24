@@ -6,10 +6,6 @@ from routes import auth, chat
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """
-    Dijalankan sekali saat aplikasi startup.
-    Load dan validasi data.json sebelum menerima request apapun.
-    """
     load_tree("data.json")
     yield
 
