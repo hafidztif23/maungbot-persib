@@ -16,28 +16,31 @@
                 "type": "superstate",
                 "message": "",
                 "options": {
-                    "1": "user_menu_utama",
-                    "2": "user_fallback"
+                    "1": "user_sambutan",
+                    "2": "user_menu_utama",
+                    "3": "user_fallback"
                 }
+            },
+
+            "user_sambutan": {
+                "id": "U.1",
+                "type": "terminal_state",
+                "action": "static",
+                "content": "Halo! Selamat datang di Maungbot.",
+                "back_to": "user_menu_utama"
             },
 
             "user_menu_utama": {
-                "id": "U.1",
+                "id": "U.2",
                 "type": "superstate",
-                "message": "Halo! Selamat datang di Maungbot. Silakan pilih menu yang tersedia:\n\n1. Informasi Jadwal Pertandingan\n2. Informasi Tiket\n3. Informasi Merchandise\n4. Informasi Pemain Persib\n5. Informasi Keanggotaan Persib\n6. Informasi Stadion GBLA\n7. Sejarah Persib Bandung",
-                "options": {
-                    "1": "jadwal",
-                    "2": "tiket",
-                    "3": "merchandise",
-                    "4": "pemain",
-                    "5": "keanggotaan",
-                    "6": "stadion",
-                    "7": "sejarah"
-                }
+                "message": "Silakan pilih menu yang tersedia:\n\n1. Informasi Jadwal Pertandingan\n2. Informasi Tiket\n3. Informasi Merchandise\n4. Informasi Pemain Persib\n5. Informasi Keanggotaan Persib\n6. Informasi Stadion GBLA\n7. Sejarah Persib Bandung",
+                "action": "route_menu",
+                "param_key": "user_input",
+                "back_to": "user_menu_utama"
             },
 
             "user_fallback": {
-                "id": "U.2",
+                "id": "U.3",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Maaf, saya tidak menemukan informasi yang sesuai dengan pertanyaan Anda. Silakan pilih menu yang tersedia atau coba dengan kata lain.",
@@ -47,7 +50,7 @@
             "state_informasi": {
                 "id": "I",
                 "type": "superstate",
-                "message": "Silahkan pilih kategori informasi:\n\n1. Informasi Jadwal Pertandingan\n2. Informasi Tiket\n3. Informasi Merchandise\n4. Informasi Pemain Persib\n5. Informasi Keanggotaan Persib\n6. Informasi Stadion GBLA\n7. Sejarah Persib Bandung",
+                "message": "",
                 "options": {
                     "1": "jadwal",
                     "2": "tiket",
@@ -63,7 +66,7 @@
             "jadwal": {
                 "id": "I.1",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi jadwal pertandingan:\n\n1. Jadwal Pertandingan Terdekat\n2. Jadwal Pertandingan Berdasarkan Nama Lawan\n3. List Jadwal Pertandingan Mendatang\n4. Jadwal Pertandingan Selesai\n0. Kembali",
+                "message": "Silahkan pilih opsi jadwal pertandingan:\n\n1. Jadwal Pertandingan Terdekat\n2. Jadwal Pertandingan Berdasarkan Nama Lawan\n3. List Jadwal Pertandingan Mendatang\n4. Jadwal Pertandingan Selesai\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "jadwal_terdekat",
                     "2": "jadwal_by_lawan_input",
@@ -113,7 +116,7 @@
             "tiket": {
                 "id": "I.2",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi tiket:\n\n1. Stok Tiket Pertandingan Terdekat\n2. Stok Tiket Pertandingan Berdasarkan Nama Lawan\n3. Harga Tiket Berdasarkan Tribun\n4. Cara Beli Tiket\n5. Kebijakan Pembatalan Tiket\n6. Kebijakan E-Voucher\n0. Kembali",
+                "message": "Silahkan pilih opsi tiket:\n\n1. Stok Tiket Pertandingan Terdekat\n2. Stok Tiket Pertandingan Berdasarkan Nama Lawan\n3. Harga Tiket Berdasarkan Tribun\n4. Cara Beli Tiket\n5. Kebijakan Pembatalan Tiket\n6. Kebijakan E-Voucher\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "stok_tiket_terdekat",
                     "2": "stok_tiket_by_lawan_input",
@@ -177,7 +180,7 @@
             "merchandise": {
                 "id": "I.3",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi merchandise:\n\n1. Cek Stok Merchandise\n2. Cara Pembelian Merchandise\n0. Kembali",
+                "message": "Silahkan pilih opsi merchandise:\n\n1. Cek Stok Merchandise\n2. Cara Pembelian Merchandise\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "check_merch_stock",
                     "2": "cara_pembelian_merchandise",
@@ -188,7 +191,7 @@
             "check_merch_stock": {
                 "id": "I.3.1",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi merchandise:\n\n1. Jersey Persib 2025\n2. Topi Persib\n3. Scarf Maung Bandung\n0. Kembali",
+                "message": "Silahkan pilih opsi merchandise:\n\n1. Jersey Persib 2025\n2. Topi Persib\n3. Scarf Maung Bandung\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "merch_jersey",
                     "2": "merch_topi",
@@ -238,7 +241,7 @@
             "pemain": {
                 "id": "I.4",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi berikut:\n\n1. Pemain Berdasarkan Nama\n2. List Pemain Berdasarkan Posisi\n3. List Pemain Berdasarkan Status\n0. Kembali",
+                "message": "Silahkan pilih opsi berikut:\n\n1. Pemain Berdasarkan Nama\n2. List Pemain Berdasarkan Posisi\n3. List Pemain Berdasarkan Status\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "pemain_by_nama_input",
                     "2": "pemain_by_posisi",
@@ -259,7 +262,7 @@
             "pemain_by_posisi": {
                 "id": "I.4.2",
                 "type": "superstate",
-                "message": "Silahkan pilih posisi pemain:\n\n1. Kiper\n2. Bek\n3. Gelandang\n4. Penyerang\n0. Kembali",
+                "message": "Silahkan pilih posisi pemain:\n\n1. Kiper\n2. Bek\n3. Gelandang\n4. Penyerang\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "pemain_by_posisi_gk",
                     "2": "pemain_by_posisi_df",
@@ -312,7 +315,7 @@
             "pemain_by_status": {
                 "id": "I.4.3",
                 "type": "superstate",
-                "message": "Silahkan pilih status pemain:\n\n1. Aktif\n2. Dipinjam ke Klub Lain\n3. Cedera\n0. Kembali",
+                "message": "Silahkan pilih status pemain:\n\n1. Aktif\n2. Dipinjam ke Klub Lain\n3. Cedera\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "pemain_by_status_aktif",
                     "2": "pemain_by_status_dipinjam",
@@ -354,19 +357,19 @@
             "keanggotaan": {
                 "id": "I.5",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi keanggotaan:\n\n1. Informasi MemberSIB\n2. Informasi Passport Persib\n3. Perbandingan MemberSIB dan Passport Persib\n0. Kembali",
+                "message": "Silahkan pilih opsi keanggotaan:\n\n1. Informasi MemberSIB\n2. Informasi Passport Persib\n3. Perbandingan MemberSIB dan Passport Persib\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "info_membersib",
                     "2": "info_passport_persib",
                     "3": "perbandingan_keanggotaan",
-                    "0": "state_informasi"
+                    "0": "user_menu_utama"
                 }
             },
 
             "info_membersib": {
                 "id": "I.5.1",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi info MemberSIB:\n\n1. Pengertian\n2. Benefit\n3. Harga\n4. Cara Daftar\n0. Kembali",
+                "message": "Silahkan pilih opsi info MemberSIB:\n\n1. Pengertian\n2. Benefit\n3. Harga\n4. Cara Daftar\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "pengertian_membersib",
                     "2": "benefit_membersib",
@@ -411,7 +414,7 @@
             "info_passport_persib": {
                 "id": "I.5.2",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi info Passport Persib: \n\n1. Pengertian\n2. Benefit\n3. Harga\n4. Cara Daftar\n0. Kembali",
+                "message": "Silahkan pilih opsi info Passport Persib: \n\n1. Pengertian\n2. Benefit\n3. Harga\n4. Cara Daftar\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "pengertian_passport_persib",
                     "2": "benefit_passport_persib",
@@ -464,23 +467,23 @@
             "stadion": {
                 "id": "I.6",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi stadion berikut:\n\n1. Informasi Stadion GBLA\n0. Kembali",
+                "message": "Silahkan pilih opsi stadion berikut:\n\n1. Informasi Stadion GBLA\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "info_stadion_gbla",
-                    "0": "state_informasi"
+                    "0": "user_menu_utama"
                 }
             },
 
             "stadion_gbla": {
                 "id": "I.6.1",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi berikut:\n\n1. Informasi Singkat Stadion GBLA\n2. Peraturan Penonton\n3. Fasilitas Stadion GBLA\n4. Informasi Parkir di Stadion GBLA\n0. Kembali",
+                "message": "Silahkan pilih opsi berikut:\n\n1. Informasi Singkat Stadion GBLA\n2. Peraturan Penonton\n3. Fasilitas Stadion GBLA\n4. Informasi Parkir di Stadion GBLA\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "info_stadion_gbla",
-                    "2": "peraturan_penonton",
-                    "3": "fasilitas_stadion",
-                    "4": "info_parkir_stadion",
-                    "0": "state_informasi"
+                    "2": "peraturan_penonton_stadion_gbla",
+                    "3": "fasilitas_stadion_gbla",
+                    "4": "info_parkir_stadion_gbla",
+                    "0": "stadion"
                 }
             },
 
@@ -492,18 +495,18 @@
                 "back_to": "user_menu_utama"
             },
 
-            "peraturan_penonton": {
+            "peraturan_penonton_stadion_gbla": {
                 "id": "I.6.1.2",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi peraturan penonton:\n\n1. Peraturan Penonton: Boleh\n2. Peraturan Penonton: Dilarang\n0. Kembali",
+                "message": "Silahkan pilih opsi peraturan penonton:\n\n1. Peraturan Penonton: Boleh\n2. Peraturan Penonton: Dilarang\n0. Kembali ke Menu Utama",
                 "options": {
-                    "1": "peraturan_penonton_boleh",
-                    "2": "peraturan_penonton_dilarang",
-                    "0": "stadion"
+                    "1": "peraturan_penonton_gbla_boleh",
+                    "2": "peraturan_penonton_gbla_dilarang",
+                    "0": "stadion_gbla"
                 }
             },
 
-            "peraturan_penonton_boleh": {
+            "peraturan_penonton_gbla_boleh": {
                 "id": "I.6.1.2.1",
                 "type": "terminal_state",
                 "action": "static",
@@ -511,7 +514,7 @@
                 "back_to": "user_menu_utama"
             },
 
-            "peraturan_penonton_dilarang": {
+            "peraturan_penonton_gbla_dilarang": {
                 "id": "I.6.1.2.2",
                 "type": "terminal_state",
                 "action": "static",
@@ -519,35 +522,35 @@
                 "back_to": "user_menu_utama"
             },
 
-            "fasilitas_stadion": {
+            "fasilitas_stadion_gbla": {
                 "id": "I.6.1.3",
                 "type": "superstate",
-                "message": "Silahkan pilih fasilitas yang ingin Anda ketahui:\n\n1. Fasilitas Tribun\n\n2. Fasilitas Toilet\n3. Fasilitas Ruang Ganti Pemain\n4. Fasilitas Ruang Medis\n0. Kembali",
+                "message": "Silahkan pilih fasilitas yang ingin Anda ketahui:\n\n1. Fasilitas Tribun\n\n2. Fasilitas Toilet\n3. Fasilitas Ruang Ganti Pemain\n4. Fasilitas Ruang Medis\n0. Kembali ke Menu Utama",
                 "options": {
-                    "1": "fasilitas_tribun",
-                    "2": "fasilitas_toilet",
-                    "3": "fasilitas_ruang_ganti_pemain",
-                    "4": "fasilitas_ruang_medis",
-                    "0": "stadion"
+                    "1": "fasilitas_tribun_stadion_gbla",
+                    "2": "fasilitas_toilet_stadion_gbla",
+                    "3": "fasilitas_ruang_ganti_pemain_stadion_gbla",
+                    "4": "fasilitas_ruang_medis_stadion_gbla",
+                    "0": "stadion_gbla"
                 }
             },
 
-            "fasilitas_tribun": {
+            "fasilitas_tribun_stadion_gbla": {
                 "id": "I.6.1.3.1",
                 "type": "superstate",
-                "message": "Silahkan pilih tribun mana yang ingin anda ketahui:\n\n1. Tribun Timur\n2. Tribun Utara\n3. Tribun Selatan\n4. Tribun VIP Barat Utara dan Barat Selatan\n5. VIP Bawah\n6. Corporate Box\n0. Kembali",
+                "message": "Silahkan pilih tribun mana yang ingin anda ketahui:\n\n1. Tribun Timur\n2. Tribun Utara\n3. Tribun Selatan\n4. Tribun VIP Barat Utara dan Barat Selatan\n5. VIP Bawah\n6. Corporate Box\n0. Kembali ke Menu Utama",
                 "options": {
-                    "1": "fasilitas_tribun_timur",
-                    "2": "fasilitas_tribun_utara",
-                    "3": "fasilitas_tribun_selatan",
-                    "4": "fasilitas_tribun_vbu_vbs",
-                    "5": "fasilitas_tribun_vip_bawah",
-                    "6": "fasilitas_tribun_corporate",
-                    "0": "fasilitas_stadion"
+                    "1": "fasilitas_tribun_gbla_timur",
+                    "2": "fasilitas_tribun_gbla_utara",
+                    "3": "fasilitas_tribun_gbla_selatan",
+                    "4": "fasilitas_tribun_gbla_vbu_vbs",
+                    "5": "fasilitas_tribun_gbla_vip_bawah",
+                    "6": "fasilitas_tribun_gbla_corporate",
+                    "0": "fasilitas_stadion_gbla"
                 }
             },
 
-            "fasilitas_tribun_timur": {
+            "fasilitas_tribun_gbla_timur": {
                 "id": "I.6.1.3.1.1",
                 "type": "terminal_state",
                 "action": "static",
@@ -555,7 +558,7 @@
                 "back_to": "user_menu_utama"
             },
             
-            "fasilitas_tribun_utara": {
+            "fasilitas_tribun_gbla_utara": {
                 "id": "I.6.1.3.1.2",
                 "type": "terminal_state",
                 "action": "static",
@@ -563,7 +566,7 @@
                 "back_to": "user_menu_utama"
             },
 
-            "fasilitas_tribun_selatan": {
+            "fasilitas_tribun_gbla_selatan": {
                 "id": "I.6.1.3.1.3",
                 "type": "terminal_state",
                 "action": "static",
@@ -571,7 +574,7 @@
                 "back_to": "user_menu_utama"
             },
 
-            "fasilitas_tribun_vbu_vbs": {
+            "fasilitas_tribun_gbla_vbu_vbs": {
                 "id": "I.6.1.3.1.4",
                 "type": "terminal_state",
                 "action": "static",
@@ -579,7 +582,7 @@
                 "back_to": "user_menu_utama"
             },
 
-            "fasilitas_tribun_vip_bawah": {
+            "fasilitas_tribun_gbla_vip_bawah": {
                 "id": "I.6.1.3.1.5",
                 "type": "terminal_state",
                 "action": "static",
@@ -587,7 +590,7 @@
                 "back_to": "user_menu_utama"
             },
 
-            "fasilitas_tribun_corporate": {
+            "fasilitas_tribun_gbla_corporate": {
                 "id": "I.6.1.3.1.6",
                 "type": "terminal_state",
                 "action": "static",
@@ -595,7 +598,7 @@
                 "back_to": "user_menu_utama"
             },
 
-            "fasilitas_toilet": {
+            "fasilitas_toilet_stadion_gbla": {
                 "id": "I.6.1.3.2",
                 "type": "terminal_state",
                 "action": "static",
@@ -603,18 +606,18 @@
                 "back_to": "user_menu_utama"
             },
 
-            "fasilitas_ruang_ganti_pemain": {
+            "fasilitas_ruang_ganti_pemain_stadion_gbla": {
                 "id": "I.6.1.3.3",
                 "type": "superstate",
-                "message": "Silahkan pilih ruang ganti:\n\n1. Ruang Ganti (Home)\n2. Ruang Ganti (Away)\n0. Kembali",
+                "message": "Silahkan pilih ruang ganti:\n\n1. Ruang Ganti (Home)\n2. Ruang Ganti (Away)\n0. Kembali ke Menu Utama",
                 "options": {
-                    "1": "ruang_ganti_home",
-                    "2": "ruang_ganti_away",
-                    "0": "fasilitas_stadion"
+                    "1": "ruang_ganti_home_gbla",
+                    "2": "ruang_ganti_away_gbla",
+                    "0": "fasilitas_stadion_gbla"
                 }
             },
 
-            "ruang_ganti_home": {
+            "ruang_ganti_home_gbla": {
                 "id": "I.6.1.3.3.1",
                 "type": "terminal_state",
                 "action": "static",
@@ -622,7 +625,7 @@
                 "back_to": "user_menu_utama"
             },
 
-            "ruang_ganti_away": {
+            "ruang_ganti_away_gbla": {
                 "id": "I.6.1.3.3.2",
                 "type": "terminal_state",
                 "action": "static",
@@ -630,7 +633,7 @@
                 "back_to": "user_menu_utama"
             },
 
-            "fasilitas_ruang_medis": {
+            "fasilitas_ruang_medis_stadion_gbla": {
                 "id": "I.6.1.3.4",
                 "type": "terminal_state",
                 "action": "static",
@@ -638,20 +641,20 @@
                 "back_to": "user_menu_utama"
             },
 
-            "info_parkir_stadion": {
+            "info_parkir_stadion_gbla": {
                 "id": "I.6.1.4",
                 "type":"superstate",
-                "message": "Silahkan pilih opsi berikut:\n\n1. Area Parkir Utara - Barat\n2. Area Parkir Timur - Selatan\n3. Area Parkir VVIP\n4. Metode Pembayaran Parkir\n0. Kembali",
+                "message": "Silahkan pilih opsi berikut:\n\n1. Area Parkir Utara - Barat\n2. Area Parkir Timur - Selatan\n3. Area Parkir VVIP\n4. Metode Pembayaran Parkir\n0. Kembali ke Menu Utama",
                 "options": {
-                    "1": "parkir_utara_barat",
-                    "2": "parkir_timur_selatan",
-                    "3": "parkir_vvip",
-                    "4": "sistem_pembayaran_parkir",
-                    "0": "stadion"
+                    "1": "parkir_utara_barat_gbla",
+                    "2": "parkir_timur_selatan_gbla",
+                    "3": "parkir_vvip_gbla",
+                    "4": "sistem_pembayaran_parkir_gbla",
+                    "0": "stadion_gbla"
                 }
             },
 
-            "parkir_utara_barat": {
+            "parkir_utara_barat_gbla": {
                 "id": "I.6.1.4.1",
                 "type": "terminal_state",
                 "action": "static",
@@ -659,7 +662,7 @@
                 "back_to": "user_menu_utama"
             },
 
-            "parkir_timur_selatan": {
+            "parkir_timur_selatan_gbla": {
                 "id": "I.6.1.4.2",
                 "type": "terminal_state",
                 "action": "static",
@@ -667,7 +670,7 @@
                 "back_to": "user_menu_utama"
             },
 
-            "parkir_vvip": {
+            "parkir_vvip_gbla": {
                 "id": "I.6.1.4.3",
                 "type": "terminal_state",
                 "action": "static",
@@ -675,7 +678,7 @@
                 "back_to": "user_menu_utama"
             },
 
-            "sistem_pembayaran_parkir": {
+            "sistem_pembayaran_parkir_gbla": {
                 "id": "I.6.1.4.4",
                 "type": "terminal_state",
                 "action": "static",
@@ -686,7 +689,7 @@
             "sejarah": {
                 "id": "I.7",
                 "type": "superstate",
-                "message": "Silahkan pilih opsi berikut:\n\n1. Sejarah Singkat\n2. Sejarah Era Perserikatan (1930)\n3. Sejarah Era Liga Indonesia (1994)\n4. Sejarah Era Liga Super (2010)\n5. Sejarah Era Liga 1 (2018)\n6. Daftar Gelar Juara Persib\n7. Daftar Pemain Legenda Persib\n0. Kembali",
+                "message": "Silahkan pilih opsi berikut:\n\n1. Sejarah Singkat\n2. Sejarah Era Perserikatan (1930)\n3. Sejarah Era Liga Indonesia (1994)\n4. Sejarah Era Liga Super (2010)\n5. Sejarah Era Liga 1 (2018)\n6. Daftar Gelar Juara Persib\n7. Daftar Pemain Legenda Persib\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "sejarah_singkat_persib",
                     "2": "sejarah_perserikatan",
@@ -695,7 +698,7 @@
                     "5": "sejarah_liga_1",
                     "6": "daftar_gelar_juara",
                     "7": "daftar_pemain_legendaris",
-                    "0": "state_informasi"
+                    "0": "user_menu_utama"
                 }
             },
 
