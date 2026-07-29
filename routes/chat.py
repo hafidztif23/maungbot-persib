@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from core.engine import process_input, get_initial_message
-from core.session import get_session, reset_session
+from core.session import get_session
 from core.dependencies import get_current_account
 
 router = APIRouter(prefix="/chat", tags=["Chat"])
@@ -25,8 +25,6 @@ def chat(
         raise HTTPException(status_code=400, detail="Pesan tidak boleh kosong.")
 
     response = process_input(id_account, body.message)
-
-    # Ambil session terbaru setelah diproses untuk dikembalikan ke frontend
     session = get_session(id_account)
 
     return ChatResponse(
@@ -40,8 +38,7 @@ def start_chat(
     current_user: dict = Depends(get_current_account),
 ):
     id_account = current_user["id_account"]
-    reset_session(id_account)
-    response = get_initial_message()
+    response = get_initial_message(id_account)
     session = get_session(id_account)
 
     return ChatResponse(

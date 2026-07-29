@@ -32,8 +32,8 @@
 
             "user_menu_utama": {
                 "id": "U.2",
-                "type": "superstate",
-                "message": "Silakan pilih menu yang tersedia:\n\n1. Informasi Jadwal Pertandingan\n2. Informasi Tiket\n3. Informasi Merchandise\n4. Informasi Pemain Persib\n5. Informasi Keanggotaan Persib\n6. Informasi Stadion GBLA\n7. Sejarah Persib Bandung",
+                "type": "transitional_state",
+                "message": "Silakan pilih menu yang tersedia:\n\n1. Informasi Jadwal Pertandingan\n2. Informasi Tiket\n3. Informasi Merchandise\n4. Informasi Pemain Persib\n5. Informasi Keanggotaan Persib\n6. Informasi Stadion yang Digunakan oleh Persib\n7. Sejarah Persib Bandung",
                 "action": "route_menu",
                 "param_key": "user_input",
                 "back_to": "user_menu_utama"
@@ -469,7 +469,7 @@
                 "type": "superstate",
                 "message": "Silahkan pilih opsi stadion berikut:\n\n1. Informasi Stadion GBLA\n0. Kembali ke Menu Utama",
                 "options": {
-                    "1": "info_stadion_gbla",
+                    "1": "stadion_gbla",
                     "0": "user_menu_utama"
                 }
             },

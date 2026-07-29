@@ -10,30 +10,48 @@ from core.formatter import format_response
 
 logger = logging.getLogger(__name__)
 
+
 def process_input(id_account: int, user_input: str) -> str:
     user_input = user_input.strip()
     session = get_session(id_account)
- 
+
     if session["waiting_input"]:
         return _handle_waiting_input(id_account, user_input, session)
- 
+
     return _handle_menu_input(id_account, user_input, session)
 
+
 def _handle_waiting_input(id_account: int, user_input: str, session: dict) -> str:
-    action       = session["pending_action"]
-    param_key    = session["pending_param_key"]
-    back_to      = session["pending_back_to"]
+    action = session["pending_action"]
+
+    if action == "route_menu":
+        return _handle_route_menu(id_account, user_input)
+
+    param_key = session["pending_param_key"]
+    back_to   = session["pending_back_to"]
 
     params = {param_key: user_input}
     result = dispatch(action, params, id_account)
 
-    save_session(id_account, back_to)
     nodes = get_nodes()
+    _transition_to(id_account, back_to, nodes)
     back_node = nodes[back_to]
- 
+
     response = format_response(action, result)
     response += "\n\n" + _render_menu(back_node)
     return response
+
+
+def _handle_route_menu(id_account: int, user_input: str) -> str:
+
+    nodes = get_nodes()
+    route_options = nodes["state_informasi"]["options"]
+    target_id = route_options.get(user_input.strip())
+
+    if target_id is None or target_id not in nodes:
+        return _execute_node(id_account, "user_fallback", nodes["user_fallback"], nodes)
+
+    return _execute_node(id_account, target_id, nodes[target_id], nodes)
 
 def _handle_menu_input(id_account: int, user_input: str, session: dict) -> str:
 
@@ -42,25 +60,24 @@ def _handle_menu_input(id_account: int, user_input: str, session: dict) -> str:
     node         = nodes.get(current_node)
 
     if node is None:
-        logger.error(f"Node '{current_node}' tidak ditemukan, reset ke root")
-        save_session(id_account, "root")
-        return _render_menu(nodes["root"])
+        logger.error(f"Node '{current_node}' tidak ditemukan, reset ke user_menu_utama")
+        return _execute_node(id_account, "user_menu_utama", nodes["user_menu_utama"], nodes)
 
     options = node.get("options", {})
     next_node_id = options.get(user_input)
- 
+
     if next_node_id is None:
         invalid_msg = (
             f"Pilihan '{user_input}' tidak tersedia. "
             f"Silakan pilih dari opsi yang ada.\n\n"
         )
         return invalid_msg + _render_menu(node)
- 
+
     next_node = nodes.get(next_node_id)
     if next_node is None:
         logger.error(f"Target node '{next_node_id}' tidak terdefinisi")
         return "Terjadi kesalahan sistem. Silakan coba lagi.\n\n" + _render_menu(node)
- 
+
     return _execute_node(id_account, next_node_id, next_node, nodes)
 
 def _execute_node(
@@ -70,16 +87,16 @@ def _execute_node(
     nodes: dict,
 ) -> str:
     node_type = node["type"]
- 
+
     if node_type in ("superstate", "substate"):
         return _execute_superstate(id_account, node_id, node)
- 
+
     if node_type == "terminal_state":
         return _execute_terminal(id_account, node_id, node, nodes)
- 
+
     if node_type == "transitional_state":
         return _execute_transitional(id_account, node_id, node)
- 
+
     logger.error(f"Tipe node tidak dikenal: '{node_type}' pada node '{node_id}'")
     return "Terjadi kesalahan sistem."
 
@@ -99,14 +116,12 @@ def _execute_terminal(
 
     if action == "static":
         params = {"content": node.get("content", "")}
- 
-    # Eksekusi action
+
     result = dispatch(action, params, id_account)
- 
-    # Simpan posisi ke back_to
-    save_session(id_account, back_to)
+
+    _transition_to(id_account, back_to, nodes)
     back_node = nodes[back_to]
- 
+
     response = format_response(action, result)
     response += "\n\n" + _render_menu(back_node)
     return response
@@ -121,9 +136,25 @@ def _execute_transitional(id_account: int, node_id: str, node: dict) -> str:
     )
     return node["message"]
 
+def _transition_to(id_account: int, target_id: str, nodes: dict) -> None:
+    target_node = nodes[target_id]
+
+    if target_node["type"] == "transitional_state":
+        save_session_waiting(
+            id_account=id_account,
+            current_node=target_id,
+            pending_action=target_node["action"],
+            pending_param_key=target_node["param_key"],
+            pending_back_to=target_node["back_to"],
+        )
+    else:
+        save_session(id_account, target_id)
+
+
 def _render_menu(node: dict) -> str:
     return node.get("message", "")
 
-def get_initial_message() -> str:
+
+def get_initial_message(id_account: int) -> str:
     nodes = get_nodes()
-    return _render_menu(nodes["root"])
+    return _execute_node(id_account, "user_sambutan", nodes["user_sambutan"], nodes)

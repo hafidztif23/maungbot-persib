@@ -8,12 +8,10 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Global variable — dibaca sekali saat startup
 _nodes: dict = {}
 
 REQUIRED_FIELDS = {
     "superstate": ["message", "options"],
-    "substate": ["message", "options"],
     "terminal_state": ["action", "back_to"],
     "transitional_state": ["message", "action", "param_key", "back_to"],
 }
@@ -29,7 +27,6 @@ def load_tree(path: str = "data.json") -> dict:
     with open(file_path, "r", encoding="utf-8") as f:
         raw = json.load(f)
 
-    # Toleransi format array maupun object langsung
     if isinstance(raw, list):
         raw = raw[0]
 
@@ -57,15 +54,12 @@ def get_nodes() -> dict:
 def _validate(nodes: dict) -> None:
     errors = []
 
-    # 1. Root harus ada
     if "root" not in nodes:
         errors.append("Node 'root' tidak ditemukan di nodes")
 
     for node_id, node in nodes.items():
-
         node_type = node.get("type")
 
-        # 2. Validasi field wajib per tipe
         if node_type not in REQUIRED_FIELDS:
             errors.append(
                 f"Node '{node_id}' memiliki type tidak dikenal: '{node_type}'"
@@ -78,7 +72,7 @@ def _validate(nodes: dict) -> None:
                     f"Node '{node_id}' (type: {node_type}) tidak memiliki field wajib: '{field}'"
                 )
 
-        # 3. Referential integrity untuk superstate
+        # Referential integrity untuk options (superstate)
         if node_type in ("superstate"):
             options = node.get("options", {})
             for choice, target in options.items():
@@ -88,6 +82,47 @@ def _validate(nodes: dict) -> None:
                         f"'{target}' yang tidak terdefinisi"
                     )
 
+        # Referential integrity untuk back_to (terminal & transitional)
+        if node_type in ("terminal_state", "transitional_state"):
+            back_to = node.get("back_to")
+            if back_to is not None and back_to not in nodes:
+                errors.append(
+                    f"Node '{node_id}' back_to merujuk ke node "
+                    f"'{back_to}' yang tidak terdefinisi"
+                )
+
     if errors:
         error_msg = "Validasi data.json gagal:\n" + "\n".join(f"  - {e}" for e in errors)
         raise RuntimeError(error_msg)
+
+def find_unreachable_nodes(entry_points: list[str] | None = None) -> list[str]:
+    nodes = get_nodes()
+
+    if entry_points is None:
+        entry_points = [
+            "user_sambutan", "user_menu_utama", "state_informasi", "user_fallback"
+        ]
+
+    visited = set()
+    queue = [n for n in entry_points if n in nodes]
+
+    while queue:
+        node_id = queue.pop()
+        if node_id in visited:
+            continue
+        visited.add(node_id)
+
+        node = nodes[node_id]
+        node_type = node.get("type")
+
+        if node_type in ("superstate", "substate"):
+            for target in node.get("options", {}).values():
+                if target not in visited:
+                    queue.append(target)
+
+        if node_type in ("terminal_state", "transitional_state"):
+            back_to = node.get("back_to")
+            if back_to and back_to not in visited:
+                queue.append(back_to)
+
+    return sorted(set(nodes.keys()) - visited)

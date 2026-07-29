@@ -1,6 +1,7 @@
 from sqlalchemy import text
 from core.db import engine
 
+
 def get_session(id_account: int) -> dict:
     with engine.connect() as conn:
         row = conn.execute(
@@ -12,19 +13,19 @@ def get_session(id_account: int) -> dict:
             """),
             {"id_account": id_account}
         ).fetchone()
- 
+
     if row is None:
         return _default_session()
- 
+
     return {
-        "current_node":     row[0],
-        "waiting_input":    row[1],
-        "pending_action":   row[2],
+        "current_node":      row[0],
+        "waiting_input":     row[1],
+        "pending_action":    row[2],
         "pending_param_key": row[3],
-        "pending_back_to":  row[4],
+        "pending_back_to":   row[4],
     }
- 
- 
+
+
 def save_session(id_account: int, current_node: str) -> None:
     with engine.begin() as conn:
         conn.execute(
@@ -45,8 +46,7 @@ def save_session(id_account: int, current_node: str) -> None:
             """),
             {"id_account": id_account, "current_node": current_node}
         )
- 
- 
+
 def save_session_waiting(
     id_account: int,
     current_node: str,
@@ -79,25 +79,31 @@ def save_session_waiting(
                 "pending_back_to":  pending_back_to,
             }
         )
- 
- 
+
+
 def reset_session(id_account: int) -> None:
-    save_session(id_account, "root")
- 
- 
+    save_session_waiting(
+        id_account=id_account,
+        current_node="user_menu_utama",
+        pending_action="route_menu",
+        pending_param_key="user_input",
+        pending_back_to="user_menu_utama",
+    )
+
+
 def delete_session(id_account: int) -> None:
     with engine.begin() as conn:
         conn.execute(
             text("DELETE FROM fsm_session WHERE id_account = :id_account"),
             {"id_account": id_account}
         )
- 
- 
+
+
 def _default_session() -> dict:
     return {
-        "current_node":      "root",
-        "waiting_input":     False,
-        "pending_action":    None,
-        "pending_param_key": None,
-        "pending_back_to":   None,
+        "current_node":      "user_menu_utama",
+        "waiting_input":     True,
+        "pending_action":    "route_menu",
+        "pending_param_key": "user_input",
+        "pending_back_to":   "user_menu_utama",
     }
