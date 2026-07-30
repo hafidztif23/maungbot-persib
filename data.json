@@ -714,7 +714,7 @@
                 "id": "I.7.2",
                 "type": "terminal_state",
                 "action": "static",
-                "content": "Berikut merupakan Sejarah Perserikatan:\n\nPerserikatan adalah kompetisi sepak bola di Indonesia yang berlangsung dari tahun 1930 hingga 1994. Persib Bandung menjadi salah satu klub yang berpartisipasi dalam kompetisi ini dan meraih beberapa gelar juara.",
+                "content": "Gimana sih sejarah Persib di Era Perserikatan (1930-1994):\n\nPerserikatan adalah kompetisi sepak bola tertua di Indonesia, berlangsung dari 1930 hingga 1994 sebelum akhirnya melebur menjadi Liga Indonesia. Sepanjang era ini, Persib mencatat perjalanan panjang penuh pasang surut, mulai dari gelar juara pertama pada 1937 usai mengalahkan Persis Solo, hingga kembali berjaya di 1961, 1986, 1990, dan menutup era ini dengan gelar juara pada 1994. Total, Persib berhasil meraih 5 gelar juara sepanjang Era Perserikatan.",
                 "back_to": "user_menu_utama"
             },
 
@@ -722,7 +722,7 @@
                 "id": "I.7.3",
                 "type": "terminal_state",
                 "action": "static",
-                "content": "Berikut merupakan Sejarah Liga Indonesia:\n\nLiga Indonesia adalah kompetisi sepak bola profesional di Indonesia yang dimulai pada tahun 1994. Persib Bandung telah berkompetisi dalam liga ini dan meraih beberapa prestasi.",
+                "content": "Gimana sih sejarah Persib di Era Liga Indonesia?\n\nLiga Indonesia mulai bergulir pada musim 1994–1995 sebagai hasil peleburan kompetisi Perserikatan dan Galatama, menandai era baru kompetisi sepak bola nasional. Persib langsung mencatat sejarah dengan menjadi juara pada musim perdananya setelah mengalahkan Petrokimia Putra 1–0 di partai final. Berkat keberhasilan tersebut, Persib juga mewakili Indonesia di ajang Piala Champions Asia musim 1995–1996.",
                 "back_to": "user_menu_utama"
             },
 
@@ -730,7 +730,7 @@
                 "id": "I.7.4",
                 "type": "terminal_state",
                 "action": "static",
-                "content": "Berikut merupakan Sejarah Liga Super:\n\nLiga Super Indonesia adalah kompetisi sepak bola profesional di Indonesia yang berlangsung dari tahun 2008 hingga 2015. Persib Bandung berpartisipasi dalam liga ini dan meraih beberapa prestasi.",
+                "content": "Gimana sih sejarah Persib di Era Liga Super?\n\nLiga Super Indonesia hadir sejak musim 2008-2009 sebagai liga divisi teratas, menggantikan Divisi Utama, sekaligus menjadi awal berdirinya PT Persib Bandung Bermartabat sebagai pengelola klub. Setelah melalui perjalanan panjang, Persib akhirnya meraih gelar juara LSI pada 2014, usai mengalahkan Arema di semifinal dan menundukkan Persipura Jayapura lewat drama adu penalti di final. Gelar ini pun dirayakan besar-besaran oleh Bobotoh di seluruh penjuru Kota Bandung.",
                 "back_to": "user_menu_utama"
             },
 
@@ -738,7 +738,7 @@
                 "id": "I.7.5",
                 "type": "terminal_state",
                 "action": "static",
-                "content": "Berikut merupakan Sejarah Liga 1:\n\nLiga 1 adalah kompetisi sepak bola profesional di Indonesia yang dimulai pada tahun 2017. Persib Bandung telah berkompetisi dalam liga ini dan meraih beberapa prestasi.",
+                "content": "Gimana sih sejarah Persib di Era Liga 1?\n\nSejak digulirkan pada 2017, Liga 1 menjadi panggung baru bagi sepak bola Indonesia, termasuk Persib. Setelah melewati musim-musim penuh tantangan, Persib akhirnya kembali juara di musim 2023/2024, mengakhiri penantian panjang sejak 1994-95. Kesuksesan ini berlanjut dengan gelar juara beruntun di 2024/2025 dan 2025/2026, mencatatkan hattrick tiga kali juara berturut-turut bagi Maung Bandung. Persib pun turut unjuk gigi di kancah Asia lewat Liga Champions Dua AFC.",
                 "back_to": "user_menu_utama"
             },
 
