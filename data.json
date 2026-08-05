@@ -1,56 +1,17 @@
 [
     {
         "nodes": {
-            "root": {
-                "id": "0",
-                "type": "superstate",
-                "message": "",
-                "options": {
-                    "1": "state_user",
-                    "2": "state_informasi"
-                }
-            },
-
-            "state_user": {
-                "id": "U",
-                "type": "superstate",
-                "message": "",
-                "options": {
-                    "1": "user_sambutan",
-                    "2": "user_menu_utama",
-                    "3": "user_fallback"
-                }
-            },
-
             "user_sambutan": {
-                "id": "U.1",
+                "id": "user_sambutan",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Halo! Selamat datang di Maungbot.",
                 "back_to": "user_menu_utama"
             },
-
             "user_menu_utama": {
-                "id": "U.2",
-                "type": "transitional_state",
+                "id": "user_menu_utama",
+                "type": "menu_state",
                 "message": "Mau cari info apa nih hari ini?:\n\n1. Jadwal dan Hasil Pertandingan Persib Musim Ini\n2. Informasi Seputar Tiket Pertandingan dan E-Voucher\n3. Informasi Seputar Merchandise Persib Bandung\n4. Daftar Seputar Pemain Persib Saat Ini\n5. Informasi Seputar Keanggotaan Persib\n6. Informasi Stadion Pertandingan yang Digunakan oleh Persib\n7. Sejarah dan Pemain Legendaris Persib Bandung",
-                "action": "route_menu",
-                "param_key": "user_input",
-                "back_to": "user_menu_utama"
-            },
-
-            "user_fallback": {
-                "id": "U.3",
-                "type": "terminal_state",
-                "action": "static",
-                "content": "Maaf, Maungbot belum menemukan jawaban yang cocok nih. Coba pilih menu yang tersedia, atau ketik dengan kata lain ya.",
-                "back_to": "user_menu_utama"
-            },
-
-            "state_informasi": {
-                "id": "I",
-                "type": "superstate",
-                "message": "",
                 "options": {
                     "1": "jadwal",
                     "2": "tiket",
@@ -58,14 +19,19 @@
                     "4": "pemain",
                     "5": "keanggotaan",
                     "6": "stadion",
-                    "7": "sejarah",
-                    "0": "user_menu_utama"
+                    "7": "sejarah"
                 }
             },
-
+            "user_fallback": {
+                "id": "user_fallback",
+                "type": "terminal_state",
+                "action": "static",
+                "content": "Maaf, Maungbot belum menemukan jawaban yang cocok nih. Coba pilih menu yang tersedia, atau ketik dengan kata lain ya.",
+                "back_to": "user_menu_utama"
+            },
             "jadwal": {
-                "id": "I.1",
-                "type": "superstate",
+                "id": "jadwal",
+                "type": "menu_state",
                 "message": "Mau lihat jadwal yang mana nih?:\n\n1. Jadwal Pertandingan Persib Selanjutnya\n2. Jadwal Pertandingan Berdasarkan Lawan Tanding\n3. List Jadwal Pertandingan Persib yang Akan Datang di Musim \n4. Hasil Pertandingan Persib yang Telah Selesai di Musim Ini\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "jadwal_terdekat",
@@ -75,26 +41,23 @@
                     "0": "user_menu_utama"
                 }
             },
-
             "jadwal_terdekat": {
-                "id": "I.1.1",
+                "id": "jadwal_terdekat",
                 "type": "terminal_state",
                 "action": "get_jadwal_terdekat",
                 "params": {},
                 "back_to": "user_menu_utama"
             },
-
             "jadwal_by_lawan_input": {
-                "id": "I.1.2",
+                "id": "jadwal_by_lawan_input",
                 "type": "transitional_state",
                 "message": "Silakan ketik nama tim lawan yang ingin dicari jadwalnya:",
                 "action": "get_jadwal_by_lawan",
                 "param_key": "nama_lawan",
                 "back_to": "user_menu_utama"
             },
-
             "jadwal_semua_mendatang": {
-                "id": "I.1.3",
+                "id": "jadwal_semua_mendatang",
                 "type": "terminal_state",
                 "action": "get_jadwal_pertandingan",
                 "params": {
@@ -102,9 +65,8 @@
                 },
                 "back_to": "user_menu_utama"
             },
-
             "jadwal_selesai": {
-                "id": "I.1.4",
+                "id": "jadwal_selesai",
                 "type": "terminal_state",
                 "action": "get_jadwal_pertandingan",
                 "params": {
@@ -112,10 +74,9 @@
                 },
                 "back_to": "user_menu_utama"
             },
-
             "tiket": {
-                "id": "I.2",
-                "type": "superstate",
+                "id": "tiket",
+                "type": "menu_state",
                 "message": "Mau cari info tiket yang mana?:\n\n1. Stok Tiket Pertandingan Persib Selanjutnya\n2. Stok Tiket Pertandingan Persib Berdasarkan Nama Lawan Tanding\n3. Harga Tiket Pertandingan Berdasarkan Tribun\n4. Cara Beli TiketPertandingan Persib\n5. Kebijakan Pembatalan Tiket Pertandingan\n6. Kebijakan E-Voucher\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "stok_tiket_terdekat",
@@ -127,59 +88,52 @@
                     "0": "user_menu_utama"
                 }
             },
-
             "stok_tiket_terdekat": {
-                "id": "I.2.1",
+                "id": "stok_tiket_terdekat",
                 "type": "terminal_state",
                 "action": "get_stok_tiket_terdekat",
                 "params": {},
                 "back_to": "user_menu_utama"
             },
-
             "stok_tiket_by_lawan_input": {
-                "id": "I.2.2",
+                "id": "stok_tiket_by_lawan_input",
                 "type": "transitional_state",
                 "message": "Silakan ketik nama tim lawan yang ingin dicari stok tiketnya:",
                 "action": "get_stok_tiket_by_lawan",
                 "param_key": "nama_lawan",
                 "back_to": "user_menu_utama"
             },
-
             "harga_tiket_by_tribun": {
-                "id": "I.2.3",
+                "id": "harga_tiket_by_tribun",
                 "type": "terminal_state",
                 "action": "get_harga_tiket_by_tribun",
                 "params": {},
                 "back_to": "user_menu_utama"
             },
-
             "cara_beli_tiket": {
-                "id": "I.2.4",
+                "id": "cara_beli_tiket",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Berikut adalah cara yang dapat anda lakukan untuk membeli tiket pertandingan Persib:\n\n1. Kunjungi situs resmi Persib Bandung.\n2. Pilih pertandingan yang ingin Anda hadiri.\n3. Pilih tribun dan jumlah tiket yang diinginkan.\n4. Lakukan pembayaran melalui metode yang tersedia.\n5. Setelah pembayaran berhasil, e-voucher tiket akan dikirim ke email Anda.",
                 "back_to": "user_menu_utama"
             },
-
             "kebijakan_pembatalan_tiket": {
-                "id": "I.2.5",
+                "id": "kebijakan_pembatalan_tiket",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Berikut adalah kebijakan pembatalan tiket pertandingan Persib:\n\n1. Tiket yang telah dibeli tidak dapat dibatalkan atau dikembalikan.\n2. Jika pertandingan dibatalkan, pengembalian dana akan dilakukan sesuai dengan kebijakan resmi Persib Bandung.\n3. Pastikan untuk membaca syarat dan ketentuan sebelum membeli tiket.",
                 "back_to": "user_menu_utama"
             },
-
             "kebijakan_evoucher": {
-                "id": "I.2.6",
+                "id": "kebijakan_evoucher",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Berikut adalah kebijakan penukaran E-Voucher Tiket Persib:\n\n1. Anda wajib Membawa KTP Asli.\n2. Anak-anak usia 6 tahun keatas wajib membawa Kartu Identitas Anak atau Kartu Keluarga asli.\n3. Penukaran gelang tidak boleh diwakilkan kepada orang lain dengan alasan apapun.\n4. Satu e-voucher hanya berlaku untuk akses masuk satu orang penonton.\n5. Seluruh pintu masuk stadion akan ditutup 15 menit setelah kick-off pertandingan.",
                 "back_to": "user_menu_utama"
             },
-
             "merchandise": {
-                "id": "I.3",
-                "type": "superstate",
+                "id": "merchandise",
+                "type": "menu_state",
                 "message": "Informasi Merchandise apa yang ingin Anda ketahui?:\n\n1. Daftar dan ketersediaan Merchandise\n2. Cara Pembelian Merchandise\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "check_merch_stock",
@@ -187,10 +141,9 @@
                     "0": "user_menu_utama"
                 }
             },
-
             "check_merch_stock": {
-                "id": "I.3.1",
-                "type": "superstate",
+                "id": "check_merch_stock",
+                "type": "menu_state",
                 "message": "Mau cek kategori Merchandise yang mana?:\n\n1. Jersey Persib 2025\n2. Topi Persib\n3. Scarf Maung Bandung\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "merch_jersey",
@@ -199,9 +152,8 @@
                     "0": "merchandise"
                 }
             },
-
             "merch_jersey": {
-                "id": "I.3.1.1",
+                "id": "merch_jersey",
                 "type": "terminal_state",
                 "action": "check_merch_stock",
                 "params": {
@@ -209,9 +161,8 @@
                 },
                 "back_to": "user_menu_utama"
             },
-
             "merch_topi": {
-                "id": "I.3.1.2",
+                "id": "merch_topi",
                 "type": "terminal_state",
                 "action": "check_merch_stock",
                 "params": {
@@ -219,9 +170,8 @@
                 },
                 "back_to": "user_menu_utama"
             },
-
             "merch_scarf": {
-                "id": "I.3.1.3",
+                "id": "merch_scarf",
                 "type": "terminal_state",
                 "action": "check_merch_stock",
                 "params": {
@@ -229,18 +179,16 @@
                 },
                 "back_to": "user_menu_utama"
             },
-
             "cara_pembelian_merchandise": {
-                "id": "I.3.2",
+                "id": "cara_pembelian_merchandise",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Berikut adalah cara yang dapat Anda lakukan untuk melakukan pembelian Merchandise Persib Bandung:\n\n1. Kunjungi situs resmi Persib Bandung atau toko resmi Persib.\n2. Pilih merchandise yang ingin Anda beli.\n3. Tambahkan ke keranjang belanja dan lanjutkan ke pembayaran.\n4. Pilih metode pembayaran yang tersedia dan selesaikan transaksi.\n5. Setelah pembayaran berhasil, Anda akan menerima konfirmasi dan informasi pengiriman.",
                 "back_to": "user_menu_utama"
             },
-
             "pemain": {
-                "id": "I.4",
-                "type": "superstate",
+                "id": "pemain",
+                "type": "menu_state",
                 "message": "Mau cari Pemain Persib berdasarkan apa?:\n\n1. Cari Pemain Berdasarkan Nama\n2. Daftar Pemain Berdasarkan Posisi\n3. Daftar Pemain Berdasarkan Status\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "pemain_by_nama_input",
@@ -249,19 +197,17 @@
                     "0": "user_menu_utama"
                 }
             },
-
             "pemain_by_nama_input": {
-                "id": "I.4.1",
+                "id": "pemain_by_nama_input",
                 "type": "transitional_state",
                 "message": "Silakan ketik nama Pemain yang ingin dicari: ",
                 "action": "get_pemain_by_nama",
                 "param_key": "nama_pemain",
                 "back_to": "user_menu_utama"
             },
-
             "pemain_by_posisi": {
-                "id": "I.4.2",
-                "type": "superstate",
+                "id": "pemain_by_posisi",
+                "type": "menu_state",
                 "message": "Mau cari Pemain Persib di posisi apa?:\n\n1. Kiper\n2. Bek\n3. Gelandang\n4. Penyerang\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "pemain_by_posisi_gk",
@@ -271,9 +217,8 @@
                     "0": "pemain"
                 }
             },
-
             "pemain_by_posisi_gk": {
-                "id": "I.4.2.1",
+                "id": "pemain_by_posisi_gk",
                 "type": "terminal_state",
                 "action": "get_pemain_by_posisi",
                 "params": {
@@ -281,9 +226,8 @@
                 },
                 "back_to": "user_menu_utama"
             },
-
             "pemain_by_posisi_df": {
-                "id": "I.4.2.2",
+                "id": "pemain_by_posisi_df",
                 "type": "terminal_state",
                 "action": "get_pemain_by_posisi",
                 "params": {
@@ -291,9 +235,8 @@
                 },
                 "back_to": "user_menu_utama"
             },
-
             "pemain_by_posisi_mf": {
-                "id": "I.4.2.3",
+                "id": "pemain_by_posisi_mf",
                 "type": "terminal_state",
                 "action": "get_pemain_by_posisi",
                 "params": {
@@ -301,9 +244,8 @@
                 },
                 "back_to": "user_menu_utama"
             },
-
             "pemain_by_posisi_fw": {
-                "id": "I.4.2.4",
+                "id": "pemain_by_posisi_fw",
                 "type": "terminal_state",
                 "action": "get_pemain_by_posisi",
                 "params": {
@@ -311,10 +253,9 @@
                 },
                 "back_to": "user_menu_utama"
             },
-
             "pemain_by_status": {
-                "id": "I.4.3",
-                "type": "superstate",
+                "id": "pemain_by_status",
+                "type": "menu_state",
                 "message": "Mau cari Pemain dengan status apa?:\n\n1. Aktif\n2. Dipinjam ke Klub Lain\n3. Cedera\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "pemain_by_status_aktif",
@@ -323,9 +264,8 @@
                     "0": "pemain"
                 }
             },
-
             "pemain_by_status_aktif": {
-                "id": "I.4.3.1",
+                "id": "pemain_by_status_aktif",
                 "type": "terminal_state",
                 "action": "get_pemain_by_status",
                 "params": {
@@ -333,9 +273,8 @@
                 },
                 "back_to": "user_menu_utama"
             },
-
             "pemain_by_status_dipinjam": {
-                "id": "I.4.3.2",
+                "id": "pemain_by_status_dipinjam",
                 "type": "terminal_state",
                 "action": "get_pemain_by_status",
                 "params": {
@@ -343,9 +282,8 @@
                 },
                 "back_to": "user_menu_utama"
             },
-
             "pemain_by_status_cedera": {
-                "id": "I.4.3.3",
+                "id": "pemain_by_status_cedera",
                 "type": "terminal_state",
                 "action": "get_pemain_by_status",
                 "params": {
@@ -353,10 +291,9 @@
                 },
                 "back_to": "user_menu_utama"
             },
-
             "keanggotaan": {
-                "id": "I.5",
-                "type": "superstate",
+                "id": "keanggotaan",
+                "type": "menu_state",
                 "message": "Mau tahu info keanggotaan Persib yang mana?:\n\n1. Informasi Seputar MemberSIB\n2. Informasi Seputar Passport Persib\n3. Perbandingan MemberSIB dan Passport Persib\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "info_membersib",
@@ -365,10 +302,9 @@
                     "0": "user_menu_utama"
                 }
             },
-
             "info_membersib": {
-                "id": "I.5.1",
-                "type": "superstate",
+                "id": "info_membersib",
+                "type": "menu_state",
                 "message": "Mau tahu info apa nih tentang MemberSIB?:\n\n1. Pengertian MemberSIB\n2. Benefit dari MemberSIB\n3. Harga MemberSIB\n4. Cara Daftar jadi MemberSIB\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "pengertian_membersib",
@@ -378,42 +314,37 @@
                     "0": "keanggotaan"
                 }
             },
-
             "pengertian_membersib": {
-                "id": "I.5.1.1",
+                "id": "pengertian_membersib",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Jadi, apa itu MemberSIB?:\n\nMemberSIB adalah program keanggotaan digital resmi PERSIB yang dirancang khusus untuk Bobotoh. Lewat program ini, Bobotoh bisa merasa lebih dekat sebagai bagian dari keluarga besar PERSIB, sekaligus menikmati berbagai kemudahan dan manfaat eksklusif di ekosistem PERSIB, mulai dari pembelian tiket, merchandise, hingga poin reward. Ada dua kategori yang bisa dipilih sesuai kebutuhan, yaitu MemberSIB Putih dan MemberSIB Biru.",
                 "back_to": "user_menu_utama"
             },
-
             "benefit_membersib": {
-                "id": "I.5.1.2",
+                "id": "benefit_membersib",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Beberapa benefit yang dapat Anda nikmati sebagai MemberSIB:\n\n1. Akses Tiket Lebih Mudah: Bebas dari war tiket, plus diskon pembelian hingga 10% (khusus member, tidak berlaku untuk non-member).\n2. Poin Berkali Lipat: Setiap transaksi tiket dan merchandise original dapat poin tambahan, 1,5x untuk MemberSIB Putih dan 2x untuk MemberSIB Biru.\n3. Diskon Merchandise: Hemat hingga 10% saat belanja merchandise resmi PERSIB di Official Store maupun PERSIB App.\n4. Reward Poin & Welcome Pack: Nikmati bonus poin tambahan dan bingkisan menarik khusus untuk pembeli paket tahunan.",
                 "back_to": "user_menu_utama"
             },
-
             "harga_membersib": {
-                "id": "I.5.1.3",
+                "id": "harga_membersib",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Berikut merupakan Daftar Harga MemberSIB:\n\nMemberSIB Putih: Rp9.900/bulan\nMemberSIB Biru: Rp39.000/bulan.",
                 "back_to": "user_menu_utama"
             },
-
             "cara_daftar_membersib": {
-                "id": "I.5.1.4",
+                "id": "cara_daftar_membersib",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Cara yang dapat Anda ikuti untuk Daftar MemberSIB:\n\n1. Buka Aplikasi PERSIB\n2.Klik tombol \"Benefits\"\n3.Klik tombol \"Beli MemberSIB\"\n4.Pilih durasi langganan\n5.Pilih metode pembayaran dan Konfirmasi Pembayaran.",
                 "back_to": "user_menu_utama"
             },
-
             "info_passport_persib": {
-                "id": "I.5.2",
-                "type": "superstate",
+                "id": "info_passport_persib",
+                "type": "menu_state",
                 "message": "Mau tahu info apa nih soal Passport Persib?: \n\n1. Pengertian Passport Persib\n2. Benefit dari Passport Persib\n3. Harga Passport Persib\n4. Cara Daftar Passport Persib\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "pengertian_passport_persib",
@@ -423,60 +354,53 @@
                     "0": "keanggotaan"
                 }
             },
-
             "pengertian_passport_persib": {
-                "id": "I.5.2.1",
+                "id": "pengertian_passport_persib",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Jadi, apa itu Passport Persib?\n\nPassport Persib adalah program keanggotaan eksklusif dari PERSIB yang dirancang khusus untuk Bobotoh. Dengan menjadi pemegang Passport Persib, Anda bisa mendapatkan berbagai keuntungan dan akses khusus sebagai bentuk apresiasi atas dukungan terhadap klub.",
                 "back_to": "user_menu_utama"
             },
-
             "benefit_passport_persib": {
-                "id": "I.5.2.2",
+                "id": "benefit_passport_persib",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Sebagai pemegang Passport Persib, ini benefit yang dapat Anda nikmati:\n\n1. Tiket VIP: Anda dapat mendapatkan tiket dengan lebih mudah, termasuk tiket VIP untuk pertandingan kandang dan beberapa pertandingan tandang tertentu.\n2. Akses ke Event Spesial: Dapat mengakses acara eksklusif seperti pembelian tiket lebih awal, ngawangkong bareng tamu spesial, dan tur stadion GBLA.\n3. Akses ke Pusat Latihan: Mendapatkan akses ke pusat latihan Persib untuk melihat langsung proses persiapan tim.\n4. Diskon Pembelian Merchandise: Mendapatkan potongan harga hingga 20% untuk semua merchandise resmi Persib.\n5. Diskon Pembelian Saham: Jika IPO Persib dibuka, Anda akan mendapatkan kesempatan untuk membeli saham lebih awal.\n6. Pengakuan Kehormatan: Nama Anda akan diabadikan di dinding mosaik kehormatan Persib melalui program Legacy Wall.\n7. Hadiah Setiap Anniversary: Mendapatkan hadiah spesial di setiap tahun anniversary keanggotaan.",
                 "back_to": "user_menu_utama"
             },
-
             "harga_passport_persib": {
-                "id": "I.5.2.3",
+                "id": "harga_passport_persib",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Passport Persib tersedia dengan harga Rp5.500.000.\n\nDengan harga ini, Anda sudah bisa menikmati seluruh benefit eksklusif Passport Persib, seperti tiket VIP, akses pusat latihan, diskon pembelian merchandise, dan berbagai keuntungan spesial lainnya.",
                 "back_to": "user_menu_utama"
             },
-
             "cara_daftar_passport_persib": {
-                "id": "I.5.2.4",
+                "id": "cara_daftar_passport_persib",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Cara yang dapat Anda ikuti untuk Daftar Passport Persib:\n\n1. Buka Aplikasi PERSIB\n2.Klik tombol \"Benefits\"\n3.Klik tombol \"Beli Passport Persib\"\n4.Pilih metode pembayaran.",
                 "back_to": "user_menu_utama"
             },
-
             "perbandingan_keanggotaan": {
-                "id": "I.5.3",
+                "id": "perbandingan_keanggotaan",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Apa sih bedanya MemberSIB dan Passport Persib?\n\nSecara garis besar, MemberSIB adalah program keanggotaan digital resmi dari PERSIB yang hadir sebagai bentuk apresiasi untuk Bobotoh setia, sementara Passport Persib adalah program keanggotaan eksklusif yang memberikan akses ke pengalaman yang lebih premium bersama klub. Nah, ini perbedaan lebih detailnya:\n\n1. Harga: MemberSIB mulai dari Rp9.900/bulan (Putih) atau Rp39.000/bulan (Biru), sedangkan Passport Persib Rp5.500.000.\n2. Benefit Tiket: MemberSIB memberi kemudahan beli tiket tanpa war dan diskon hingga 10%, sementara Passport Persib memberi akses tiket VIP untuk laga kandang dan beberapa laga tandang.\n3. Diskon Merchandise: MemberSIB diskon hingga 10%, Passport Persib diskon hingga 20%.\n4. Fasilitas Tambahan: MemberSIB fokus ke kelipatan poin transaksi dan reward tahunan, sedangkan Passport Persib memberi akses lebih eksklusif seperti akses pusat latihan, event spesial bareng tamu VIP, tur Stadion GBLA, hingga pengakuan nama di Legacy Wall.\n\nSingkatnya, MemberSIB cocok untuk Bobotoh yang ingin keanggotaan terjangkau dengan benefit rutin, sementara Passport Persib cocok untuk Bobotoh yang ingin pengalaman lebih eksklusif dan mendalam bersama klub.",
                 "back_to": "user_menu_utama"
             },
-
             "stadion": {
-                "id": "I.6",
-                "type": "superstate",
+                "id": "stadion",
+                "type": "menu_state",
                 "message": "Info stadion mana yang ingin diketahui?:\n\n1. Informasi Stadion GBLA\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "stadion_gbla",
                     "0": "user_menu_utama"
                 }
             },
-
             "stadion_gbla": {
-                "id": "I.6.1",
-                "type": "superstate",
+                "id": "stadion_gbla",
+                "type": "menu_state",
                 "message": "Mau cari info apa nih tentang Stadion GBLA?:\n\n1. Pengantar Singkat tentang Stadion GBLA\n2. Peraturan Penonton di Stadion GBLA\n3. Fasilitas Stadion GBLA\n4. Informasi Parkir Kendaraan di Stadion GBLA\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "info_stadion_gbla",
@@ -486,18 +410,16 @@
                     "0": "stadion"
                 }
             },
-
             "info_stadion_gbla": {
-                "id": "I.6.1.1",
+                "id": "info_stadion_gbla",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Kenalan sama Stadion GBLA, yuk:\n\nStadion Gelora Bandung Lautan Api (GBLA) adalah stadion sepak bola yang terletak di kawasan Gedebage, Bandung, dan menjadi markas resmi Persib sejak diresmikan pada 10 Mei 2013. Nama GBLA diambil dari peristiwa bersejarah Bandung Lautan Api tahun 1946, sebagai simbol semangat juang masyarakat Bandung. Dengan kapasitas sekitar 38.000 penonton serta fasilitas yang telah memenuhi standar FIFA, GBLA menjadi salah satu stadion dengan atmosfer supporter yang meriah di Indonesia.",
                 "back_to": "user_menu_utama"
             },
-
             "peraturan_penonton_stadion_gbla": {
-                "id": "I.6.1.2",
-                "type": "superstate",
+                "id": "peraturan_penonton_stadion_gbla",
+                "type": "menu_state",
                 "message": "Info aturan Penonton GBLA apa yang ingin diketahui?:\n\n1. Peraturan yang Boleh dilakukan Penonton\n2. Peraturan yang Dilarang dilakukan Penonton\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "peraturan_penonton_gbla_boleh",
@@ -505,26 +427,23 @@
                     "0": "stadion_gbla"
                 }
             },
-
             "peraturan_penonton_gbla_boleh": {
-                "id": "I.6.1.2.1",
+                "id": "peraturan_penonton_gbla_boleh",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Ini hal-hal yang boleh dilakukan penonton di Stadion GBLA:\n\n1. Membawa perlengkapan balita (botol susu, alat makan, kereta bayi), namun bisa dicek petugas dan risiko kehilangan bukan tanggung jawab Panpel.\n2. Membawa tumbler plastik transparan setelah mendapat izin dan pengecekan dari Panpel.\n3. Membawa alat bantu seperti tongkat, kursi portable untuk lansia, alat bantu dengar, kursi roda, dan alat medis lainnya.\n4. Membawa laptop, tablet, atau handphone dengan menunjukkannya ke petugas saat pemeriksaan di gate.\n5. Membawa tas dengan menunjukkannya lebih dulu ke petugas; isi tas berhak diperiksa dan barang terlarang bisa disita.\n6. Membawa alat musik lewat gate khusus, dengan pengecekan dan potensi penolakan jika dianggap mengganggu kenyamanan penonton lain.\n7. Membawa bendera, koreo, dan spanduk dukungan lewat gate khusus, dengan pengecekan serupa.\n8. Koreo atau spanduk berukuran besar hanya boleh dipasang sebelum pertandingan, setelah mendapat izin resmi dari Pengelola Stadion dan pihak keamanan.",
                 "back_to": "user_menu_utama"
             },
-
             "peraturan_penonton_gbla_dilarang": {
-                "id": "I.6.1.2.2",
+                "id": "peraturan_penonton_gbla_dilarang",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Ini hal-hal yang dilarang bagi penonton di Stadion GBLA:\n\n1. Berdiri di kursi atau menaiki pagar pembatas.\n2. Melompati pagar pembatas tribun.\n3. Menghalangi koridor, akses jalan, pintu masuk/keluar, atau tangga.\n4. Merokok atau vape di area tribun (hanya boleh di smoking area yang ditentukan).\n5. Membawa makanan dari luar, kecuali makanan bayi.\n6. Menggunakan payung di dalam tribun.\n7. Membawa botol minum plastik atau kaleng (bisa ditukar dengan wadah dari Panpel di gate).\n8. Membawa botol kaca atau stainless, kecuali untuk perlengkapan balita.\n9. Melakukan tindakan diskriminatif, nyanyian, atau pelecehan.\n10. Membawa hewan peliharaan.\n11. Membawa peluit, kecuali petugas berwenang.\n12. Membawa senjata tajam atau benda berbahaya lainnya.\n13. Membawa alkohol atau narkotika/psikotropika.\n14. Membawa korek api atau pemantik ke ring 1 atau tribun.\n15. Melakukan vandalisme di area tribun.\n16. Membawa benda mudah terbakar seperti kembang api, petasan, smoke bomb, atau flare — denda Rp50 juta hingga Rp200 juta.\n17. Menggunakan alat laser — denda Rp20 juta per pemakaian.\n18. Melempar benda ke lapangan — denda minimal Rp20 juta.\n19. Menampilkan slogan menghina, provokatif, SARA, atau bermuatan politis — denda Rp20 juta per objek (maksimal 5).\n20. Menggunakan kata-kata atau bunyi yang menghina atau melecehkan.\n21. Masuk ke lapangan tanpa izin — denda Rp30-50 juta.\n22. Melakukan penjarahan — sanksi bagi individu dan klub.\n23. Melakukan kerusuhan seperti pembakaran atau perusakan — sanksi bagi klub dan larangan masuk stadion bagi individu minimal 10 bulan.\n24. Melakukan kekerasan seperti penganiayaan atau perkelahian — sanksi serupa bagi klub dan individu.\n\nSeluruh sanksi mengacu pada Kode Disiplin PSSI 2023.",
                 "back_to": "user_menu_utama"
             },
-
             "fasilitas_stadion_gbla": {
-                "id": "I.6.1.3",
-                "type": "superstate",
+                "id": "fasilitas_stadion_gbla",
+                "type": "menu_state",
                 "message": "Mau tahu fasilitas Stadion GBLA yang mana:\n\n1. Fasilitas Berdasarkan Tribun\n\n2. Fasilitas Toilet\n3. Fasilitas Ruang Ganti Pemain\n4. Fasilitas Ruang Medis\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "fasilitas_tribun_stadion_gbla",
@@ -534,10 +453,9 @@
                     "0": "stadion_gbla"
                 }
             },
-
             "fasilitas_tribun_stadion_gbla": {
-                "id": "I.6.1.3.1",
-                "type": "superstate",
+                "id": "fasilitas_tribun_stadion_gbla",
+                "type": "menu_state",
                 "message": "Mau tahu fasilitas tribun yang mana?\n\n1. Tribun Timur\n2. Tribun Utara\n3. Tribun Selatan\n4. Tribun VIP Barat Utara dan Barat Selatan\n5. VIP Bawah\n6. Corporate Box\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "fasilitas_tribun_gbla_timur",
@@ -549,66 +467,58 @@
                     "0": "fasilitas_stadion_gbla"
                 }
             },
-
             "fasilitas_tribun_gbla_timur": {
-                "id": "I.6.1.3.1.1",
+                "id": "fasilitas_tribun_gbla_timur",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Tribun Timur: Diperuntukkan untuk umum dan Viking Persib Club.",
                 "back_to": "user_menu_utama"
             },
-            
             "fasilitas_tribun_gbla_utara": {
-                "id": "I.6.1.3.1.2",
+                "id": "fasilitas_tribun_gbla_utara",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Tribun Utara: Diperuntukkan untuk umum dan NorthenWall.",
                 "back_to": "user_menu_utama"
             },
-
             "fasilitas_tribun_gbla_selatan": {
-                "id": "I.6.1.3.1.3",
+                "id": "fasilitas_tribun_gbla_selatan",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Tribun Selatan: Diperuntukkan untuk umum dan Southside.",
                 "back_to": "user_menu_utama"
             },
-
             "fasilitas_tribun_gbla_vbu_vbs": {
-                "id": "I.6.1.3.1.4",
+                "id": "fasilitas_tribun_gbla_vbu_vbs",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Tribun VIP Barat Utara dan Selatan: Dikhususkan untuk pemegang tiket VIP Barat Utara atau Barat Selatan.",
                 "back_to": "user_menu_utama"
             },
-
             "fasilitas_tribun_gbla_vip_bawah": {
-                "id": "I.6.1.3.1.5",
+                "id": "fasilitas_tribun_gbla_vip_bawah",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "VIP Bawah: Dikhususkan untuk pemegang tiket VIP Bawah dan mendapatkan fasilitas WiFI dan makanan ringan.",
                 "back_to": "user_menu_utama"
             },
-
             "fasilitas_tribun_gbla_corporate": {
-                "id": "I.6.1.3.1.6",
+                "id": "fasilitas_tribun_gbla_corporate",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Corporate Box: Dikhusukan untuk pembeli Corporate seat dan pemegang Pasport Persib, mendapatkan fasilitas WiFI dan prasmanan.",
                 "back_to": "user_menu_utama"
             },
-
             "fasilitas_toilet_stadion_gbla": {
-                "id": "I.6.1.3.2",
+                "id": "fasilitas_toilet_stadion_gbla",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Berikut merupakan Fasilitas Toilet yang ada di Stadion GBLA:\n\n1. Kloset Duduk\n2. Flush\n3. Tisu\n4. Semprotan air\n5. Wastafel\n6. Cermin\n7. Sabun\n8. Pengering tangan",
                 "back_to": "user_menu_utama"
             },
-
             "fasilitas_ruang_ganti_pemain_stadion_gbla": {
-                "id": "I.6.1.3.3",
-                "type": "superstate",
+                "id": "fasilitas_ruang_ganti_pemain_stadion_gbla",
+                "type": "menu_state",
                 "message": "Fasilitas ruang ganti mana yang ingin Anda ketahui?:\n\n1. Ruang Ganti (Home)\n2. Ruang Ganti (Away)\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "ruang_ganti_home_gbla",
@@ -616,34 +526,30 @@
                     "0": "fasilitas_stadion_gbla"
                 }
             },
-
             "ruang_ganti_home_gbla": {
-                "id": "I.6.1.3.3.1",
+                "id": "ruang_ganti_home_gbla",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Fasilitas Ruang Ganti - Home:\n\n1. Minuman Isotonik\n2. Jersey",
                 "back_to": "user_menu_utama"
             },
-
             "ruang_ganti_away_gbla": {
-                "id": "I.6.1.3.3.2",
+                "id": "ruang_ganti_away_gbla",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Fasilitas Ruang Ganti - Away:\n\n1. Minuman Isotonik",
                 "back_to": "user_menu_utama"
             },
-
             "fasilitas_ruang_medis_stadion_gbla": {
-                "id": "I.6.1.3.4",
+                "id": "fasilitas_ruang_medis_stadion_gbla",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Berikut merupakan Fasilitas Ruang Medis yang ada di Stadion GBLA:\n\n1. Peralatan Pertolongan Pertama untuk umum\n2. Peralatan Pertolongan Pertama untuk Pemain",
                 "back_to": "user_menu_utama"
             },
-
             "info_parkir_stadion_gbla": {
-                "id": "I.6.1.4",
-                "type":"superstate",
+                "id": "info_parkir_stadion_gbla",
+                "type": "menu_state",
                 "message": "Silahkan pilih informasi mana yang ingin Anda ketahui tentang parkir kendaraan di Stadion GBLA?:\n\n1. Area Parkir Utara - Barat\n2. Area Parkir Timur - Selatan\n3. Area Parkir VVIP\n4. Metode Pembayaran Parkir\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "parkir_utara_barat_gbla",
@@ -653,42 +559,37 @@
                     "0": "stadion_gbla"
                 }
             },
-
             "parkir_utara_barat_gbla": {
-                "id": "I.6.1.4.1",
+                "id": "parkir_utara_barat_gbla",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Parkir Utara Barat diperuntukkan bagi akses terdekat menuju tribun Utara dan VIP Barat Utara.",
                 "back_to": "user_menu_utama"
             },
-
             "parkir_timur_selatan_gbla": {
-                "id": "I.6.1.4.2",
+                "id": "parkir_timur_selatan_gbla",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Parkir Timur Selatan diperuntukkan bagi akses terdekat menuju tribun Timur, Selatan, dan VIP Barat Selatan.",
                 "back_to": "user_menu_utama"
             },
-
             "parkir_vvip_gbla": {
-                "id": "I.6.1.4.3",
+                "id": "parkir_vvip_gbla",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Parkir VVIP diperuntukkan bagi akses terdekat, dan hanya untuk pemegang tiket tribun VIP Bawah dan Corporate Box.",
                 "back_to": "user_menu_utama"
             },
-
             "sistem_pembayaran_parkir_gbla": {
-                "id": "I.6.1.4.4",
+                "id": "sistem_pembayaran_parkir_gbla",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Sistem Pembayaran Parkir Stadion GBLA:\n\n1. Tunai\n2. Kartu Uang Elektronik (e-Money, Flazz, Brizzi)\n3. Dompet Digital via QRIS (GoPay, Dana, OVO)",
                 "back_to": "user_menu_utama"
             },
-
             "sejarah": {
-                "id": "I.7",
-                "type": "superstate",
+                "id": "sejarah",
+                "type": "menu_state",
                 "message": "Mau tahu info sejarah Persib yang mana?:\n\n1. Sejarah Singkat Persib Bandung\n2. Sejarah Era Perserikatan (1930)\n3. Sejarah Era Liga Indonesia (1994)\n4. Sejarah Era Liga Super (2010)\n5. Sejarah Era Liga 1 (2018)\n6. Daftar Gelar Juara Persib\n7. Daftar Pemain Legenda Persib\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "sejarah_singkat_persib",
@@ -701,57 +602,50 @@
                     "0": "user_menu_utama"
                 }
             },
-
             "sejarah_singkat_persib": {
-                "id": "I.7.1",
+                "id": "sejarah_singkat_persib",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Ini sejarah singkat Persib Bandung:\n\nCikal bakal Persib adalah Bandoeng Inlandsche Voetbal Bond (BIVB), perserikatan klub sepak bola bumi putra pertama di Bandung yang didirikan pada 5 Januari 1919. Pada 19 April 1930, BIVB menjadi salah satu dari tujuh klub pendiri PSSI. Setelah melalui beberapa transformasi nama, BIVB akhirnya melebur dengan NVB dan resmi menjadi Persib pada 18 Maret 1934. Sejak 9 September 2009, Persib bertransformasi menjadi klub profesional di bawah pengelolaan PT Persib Bandung Bermartabat.",
                 "back_to": "user_menu_utama"
             },
-
             "sejarah_perserikatan": {
-                "id": "I.7.2",
+                "id": "sejarah_perserikatan",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Gimana sih sejarah Persib di Era Perserikatan (1930-1994):\n\nPerserikatan adalah kompetisi sepak bola tertua di Indonesia, berlangsung dari 1930 hingga 1994 sebelum akhirnya melebur menjadi Liga Indonesia. Sepanjang era ini, Persib mencatat perjalanan panjang penuh pasang surut, mulai dari gelar juara pertama pada 1937 usai mengalahkan Persis Solo, hingga kembali berjaya di 1961, 1986, 1990, dan menutup era ini dengan gelar juara pada 1994. Total, Persib berhasil meraih 5 gelar juara sepanjang Era Perserikatan.",
                 "back_to": "user_menu_utama"
             },
-
             "sejarah_liga_indonesia": {
-                "id": "I.7.3",
+                "id": "sejarah_liga_indonesia",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Gimana sih sejarah Persib di Era Liga Indonesia?\n\nLiga Indonesia mulai bergulir pada musim 1994–1995 sebagai hasil peleburan kompetisi Perserikatan dan Galatama, menandai era baru kompetisi sepak bola nasional. Persib langsung mencatat sejarah dengan menjadi juara pada musim perdananya setelah mengalahkan Petrokimia Putra 1–0 di partai final. Berkat keberhasilan tersebut, Persib juga mewakili Indonesia di ajang Piala Champions Asia musim 1995–1996.",
                 "back_to": "user_menu_utama"
             },
-
             "sejarah_liga_super": {
-                "id": "I.7.4",
+                "id": "sejarah_liga_super",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Gimana sih sejarah Persib di Era Liga Super?\n\nLiga Super Indonesia hadir sejak musim 2008-2009 sebagai liga divisi teratas, menggantikan Divisi Utama, sekaligus menjadi awal berdirinya PT Persib Bandung Bermartabat sebagai pengelola klub. Setelah melalui perjalanan panjang, Persib akhirnya meraih gelar juara LSI pada 2014, usai mengalahkan Arema di semifinal dan menundukkan Persipura Jayapura lewat drama adu penalti di final. Gelar ini pun dirayakan besar-besaran oleh Bobotoh di seluruh penjuru Kota Bandung.",
                 "back_to": "user_menu_utama"
             },
-
             "sejarah_liga_1": {
-                "id": "I.7.5",
+                "id": "sejarah_liga_1",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Gimana sih sejarah Persib di Era Liga 1?\n\nSejak digulirkan pada 2017, Liga 1 menjadi panggung baru bagi sepak bola Indonesia, termasuk Persib. Setelah melewati musim-musim penuh tantangan, Persib akhirnya kembali juara di musim 2023/2024, mengakhiri penantian panjang sejak 1994-95. Kesuksesan ini berlanjut dengan gelar juara beruntun di 2024/2025 dan 2025/2026, mencatatkan hattrick tiga kali juara berturut-turut bagi Maung Bandung. Persib pun turut unjuk gigi di kancah Asia lewat Liga Champions Dua AFC.",
                 "back_to": "user_menu_utama"
             },
-
             "daftar_gelar_juara": {
-                "id": "I.7.6",
+                "id": "daftar_gelar_juara",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Berikut adalah daftar gelar juara yang telah diraih oleh Persib Bandung:\n\n1. Liga Indonesia: 1994, 2014, 2023-24, 2024-25, dan 2025-26\n2. Piala Presiden: 2015",
                 "back_to": "user_menu_utama"
             },
-
             "daftar_pemain_legendaris": {
-                "id": "I.7.7",
+                "id": "daftar_pemain_legendaris",
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Berikut adalah beberapa pemain legendaris Persib Bandung:\n\n1. Robby Darwis\n2. Asep Sumantri\n3. Djadjang Nurdjaman\n4. Sutiono Lamso\n5. Cecep Supriatna",
