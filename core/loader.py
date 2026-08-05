@@ -11,11 +11,10 @@ logger = logging.getLogger(__name__)
 _nodes: dict = {}
 
 REQUIRED_FIELDS = {
-    "superstate": ["message", "options"],
+    "menu_state": ["message", "options"],
     "terminal_state": ["action", "back_to"],
     "transitional_state": ["message", "action", "param_key", "back_to"],
 }
-
 
 def load_tree(path: str = "data.json") -> dict:
     global _nodes
@@ -44,18 +43,17 @@ def load_tree(path: str = "data.json") -> dict:
     logger.info(f"Total {len(nodes)} node berhasil di-load dan divalidasi.")
     return _nodes
 
-
 def get_nodes() -> dict:
     if not _nodes:
         raise RuntimeError("FSM tree belum dimuat. Panggil load_tree() saat startup.")
     return _nodes
 
-
 def _validate(nodes: dict) -> None:
     errors = []
 
-    if "root" not in nodes:
-        errors.append("Node 'root' tidak ditemukan di nodes")
+    # Validasi bahwa node awal / utama itu ada
+    if "user_menu_utama" not in nodes:
+        errors.append("Node 'user_menu_utama' tidak ditemukan di nodes")
 
     for node_id, node in nodes.items():
         node_type = node.get("type")
@@ -72,8 +70,8 @@ def _validate(nodes: dict) -> None:
                     f"Node '{node_id}' (type: {node_type}) tidak memiliki field wajib: '{field}'"
                 )
 
-        # Referential integrity untuk options (superstate)
-        if node_type in ("superstate"):
+        # Referential integrity untuk options (menu_state)
+        if node_type == "menu_state":
             options = node.get("options", {})
             for choice, target in options.items():
                 if target not in nodes:
@@ -100,7 +98,7 @@ def find_unreachable_nodes(entry_points: list[str] | None = None) -> list[str]:
 
     if entry_points is None:
         entry_points = [
-            "user_sambutan", "user_menu_utama", "state_informasi", "user_fallback"
+            "user_sambutan", "user_menu_utama", "user_fallback"
         ]
 
     visited = set()
@@ -115,7 +113,7 @@ def find_unreachable_nodes(entry_points: list[str] | None = None) -> list[str]:
         node = nodes[node_id]
         node_type = node.get("type")
 
-        if node_type in ("superstate", "substate"):
+        if node_type == "menu_state":
             for target in node.get("options", {}).values():
                 if target not in visited:
                     queue.append(target)

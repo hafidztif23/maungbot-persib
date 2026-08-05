@@ -1,7 +1,6 @@
 from sqlalchemy import text
 from core.db import engine
 
-
 def get_session(id_account: int) -> dict:
     with engine.connect() as conn:
         row = conn.execute(
@@ -24,7 +23,6 @@ def get_session(id_account: int) -> dict:
         "pending_param_key": row[3],
         "pending_back_to":   row[4],
     }
-
 
 def save_session(id_account: int, current_node: str) -> None:
     with engine.begin() as conn:
@@ -80,15 +78,8 @@ def save_session_waiting(
             }
         )
 
-
 def reset_session(id_account: int) -> None:
-    save_session_waiting(
-        id_account=id_account,
-        current_node="user_menu_utama",
-        pending_action="route_menu",
-        pending_param_key="user_input",
-        pending_back_to="user_menu_utama",
-    )
+    save_session(id_account, "user_menu_utama")
 
 
 def delete_session(id_account: int) -> None:
@@ -98,12 +89,11 @@ def delete_session(id_account: int) -> None:
             {"id_account": id_account}
         )
 
-
 def _default_session() -> dict:
     return {
         "current_node":      "user_menu_utama",
-        "waiting_input":     True,
-        "pending_action":    "route_menu",
-        "pending_param_key": "user_input",
-        "pending_back_to":   "user_menu_utama",
+        "waiting_input":     False,
+        "pending_action":    None,
+        "pending_param_key": None,
+        "pending_back_to":   None,
     }

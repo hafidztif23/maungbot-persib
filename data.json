@@ -149,7 +149,7 @@
                     "1": "merch_jersey",
                     "2": "merch_topi",
                     "3": "merch_scarf",
-                    "0": "merchandise"
+                    "0": "user_menu_utama"
                 }
             },
             "merch_jersey": {
@@ -214,7 +214,7 @@
                     "2": "pemain_by_posisi_df",
                     "3": "pemain_by_posisi_mf",
                     "4": "pemain_by_posisi_fw",
-                    "0": "pemain"
+                    "0": "user_menu_utama"
                 }
             },
             "pemain_by_posisi_gk": {
@@ -261,7 +261,7 @@
                     "1": "pemain_by_status_aktif",
                     "2": "pemain_by_status_dipinjam",
                     "3": "pemain_by_status_cedera",
-                    "0": "pemain"
+                    "0": "user_menu_utama"
                 }
             },
             "pemain_by_status_aktif": {
@@ -311,7 +311,7 @@
                     "2": "benefit_membersib",
                     "3": "harga_membersib",
                     "4": "cara_daftar_membersib",
-                    "0": "keanggotaan"
+                    "0": "user_menu_utama"
                 }
             },
             "pengertian_membersib": {
@@ -351,7 +351,7 @@
                     "2": "benefit_passport_persib",
                     "3": "harga_passport_persib",
                     "4": "cara_daftar_passport_persib",
-                    "0": "keanggotaan"
+                    "0": "user_menu_utama"
                 }
             },
             "pengertian_passport_persib": {
@@ -407,7 +407,7 @@
                     "2": "peraturan_penonton_stadion_gbla",
                     "3": "fasilitas_stadion_gbla",
                     "4": "info_parkir_stadion_gbla",
-                    "0": "stadion"
+                    "0": "user_menu_utama"
                 }
             },
             "info_stadion_gbla": {
@@ -424,7 +424,7 @@
                 "options": {
                     "1": "peraturan_penonton_gbla_boleh",
                     "2": "peraturan_penonton_gbla_dilarang",
-                    "0": "stadion_gbla"
+                    "0": "user_menu_utama"
                 }
             },
             "peraturan_penonton_gbla_boleh": {
@@ -450,7 +450,7 @@
                     "2": "fasilitas_toilet_stadion_gbla",
                     "3": "fasilitas_ruang_ganti_pemain_stadion_gbla",
                     "4": "fasilitas_ruang_medis_stadion_gbla",
-                    "0": "stadion_gbla"
+                    "0": "user_menu_utama"
                 }
             },
             "fasilitas_tribun_stadion_gbla": {
@@ -523,7 +523,7 @@
                 "options": {
                     "1": "ruang_ganti_home_gbla",
                     "2": "ruang_ganti_away_gbla",
-                    "0": "fasilitas_stadion_gbla"
+                    "0": "user_menu_utama"
                 }
             },
             "ruang_ganti_home_gbla": {
@@ -556,7 +556,7 @@
                     "2": "parkir_timur_selatan_gbla",
                     "3": "parkir_vvip_gbla",
                     "4": "sistem_pembayaran_parkir_gbla",
-                    "0": "stadion_gbla"
+                    "0": "user_menu_utama"
                 }
             },
             "parkir_utara_barat_gbla": {
