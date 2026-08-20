@@ -392,9 +392,10 @@
             "stadion": {
                 "id": "stadion",
                 "type": "menu_state",
-                "message": "Info stadion mana yang ingin diketahui?:\n\n1. Informasi Stadion GBLA\n0. Kembali ke Menu Utama",
+                "message": "Info stadion mana yang ingin diketahui?:\n\n1. Informasi Stadion GBLA\n2. Informasi Stadion Jalak Harupat\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "stadion_gbla",
+                    "2": "stadion_jalak",
                     "0": "user_menu_utama"
                 }
             },
@@ -407,6 +408,18 @@
                     "2": "peraturan_penonton_stadion_gbla",
                     "3": "fasilitas_stadion_gbla",
                     "4": "info_parkir_stadion_gbla",
+                    "0": "user_menu_utama"
+                }
+            },
+            "stadion_jalak": {
+                "id": "stadion_jalak",
+                "type": "menu_state",
+                "message": "Mau cari info apa nih tentang Stadion Jalak Harupat?:\n\n1. Pengantar Singkat tentang Stadion Jalak Harupat\n2. Peraturan Penonton di Stadion Jalak Harupat\n3. Fasilitas Stadion Jalak Harupat\n4. Informasi Parkir Kendaraan di Stadion Jalak Harupat\n0. Kembali ke Menu Utama",
+                "options": {
+                    "1": "info_stadion_jalak",
+                    "2": "peraturan_penonton_stadion_jalak",
+                    "3": "fasilitas_stadion_jalak",
+                    "4": "info_parkir_stadion_jalak",
                     "0": "user_menu_utama"
                 }
             },
@@ -585,6 +598,183 @@
                 "type": "terminal_state",
                 "action": "static",
                 "content": "Sistem Pembayaran Parkir Stadion GBLA:\n\n1. Tunai\n2. Kartu Uang Elektronik (e-Money, Flazz, Brizzi)\n3. Dompet Digital via QRIS (GoPay, Dana, OVO)",
+                "back_to": "user_menu_utama"
+            },
+            "info_stadion_jalak": {
+                "id": "info_stadion_jalak",
+                "type": "terminal_state",
+                "action": "static",
+                "content": "Kenalan sama Stadion GBLA, yuk:\n\nStadion Gelora Bandung Lautan Api (GBLA) adalah stadion sepak bola yang terletak di kawasan Gedebage, Bandung, dan menjadi markas resmi Persib sejak diresmikan pada 10 Mei 2013. Nama GBLA diambil dari peristiwa bersejarah Bandung Lautan Api tahun 1946, sebagai simbol semangat juang masyarakat Bandung. Dengan kapasitas sekitar 38.000 penonton serta fasilitas yang telah memenuhi standar FIFA, GBLA menjadi salah satu stadion dengan atmosfer supporter yang meriah di Indonesia.",
+                "back_to": "user_menu_utama"
+            },
+            "peraturan_penonton_stadion_jalak": {
+                "id": "peraturan_penonton_stadion_jalak",
+                "type": "menu_state",
+                "message": "Info aturan Penonton Jalak Harupat apa yang ingin diketahui?:\n\n1. Peraturan yang Boleh dilakukan Penonton\n2. Peraturan yang Dilarang dilakukan Penonton\n0. Kembali ke Menu Utama",
+                "options": {
+                    "1": "peraturan_penonton_jalak_boleh",
+                    "2": "peraturan_penonton_jalak_dilarang",
+                    "0": "user_menu_utama"
+                }
+            },
+            "peraturan_penonton_jalak_boleh": {
+                "id": "peraturan_penonton_jalak_boleh",
+                "type": "terminal_state",
+                "action": "static",
+                "content": "Ini hal-hal yang boleh dilakukan penonton di Stadion GBLA:\n\n1. Membawa perlengkapan balita (botol susu, alat makan, kereta bayi), namun bisa dicek petugas dan risiko kehilangan bukan tanggung jawab Panpel.\n2. Membawa tumbler plastik transparan setelah mendapat izin dan pengecekan dari Panpel.\n3. Membawa alat bantu seperti tongkat, kursi portable untuk lansia, alat bantu dengar, kursi roda, dan alat medis lainnya.\n4. Membawa laptop, tablet, atau handphone dengan menunjukkannya ke petugas saat pemeriksaan di gate.\n5. Membawa tas dengan menunjukkannya lebih dulu ke petugas; isi tas berhak diperiksa dan barang terlarang bisa disita.\n6. Membawa alat musik lewat gate khusus, dengan pengecekan dan potensi penolakan jika dianggap mengganggu kenyamanan penonton lain.\n7. Membawa bendera, koreo, dan spanduk dukungan lewat gate khusus, dengan pengecekan serupa.\n8. Koreo atau spanduk berukuran besar hanya boleh dipasang sebelum pertandingan, setelah mendapat izin resmi dari Pengelola Stadion dan pihak keamanan.",
+                "back_to": "user_menu_utama"
+            },
+            "peraturan_penonton_jalak_dilarang": {
+                "id": "peraturan_penonton_jalak_dilarang",
+                "type": "terminal_state",
+                "action": "static",
+                "content": "Ini hal-hal yang dilarang bagi penonton di Stadion GBLA:\n\n1. Berdiri di kursi atau menaiki pagar pembatas.\n2. Melompati pagar pembatas tribun.\n3. Menghalangi koridor, akses jalan, pintu masuk/keluar, atau tangga.\n4. Merokok atau vape di area tribun (hanya boleh di smoking area yang ditentukan).\n5. Membawa makanan dari luar, kecuali makanan bayi.\n6. Menggunakan payung di dalam tribun.\n7. Membawa botol minum plastik atau kaleng (bisa ditukar dengan wadah dari Panpel di gate).\n8. Membawa botol kaca atau stainless, kecuali untuk perlengkapan balita.\n9. Melakukan tindakan diskriminatif, nyanyian, atau pelecehan.\n10. Membawa hewan peliharaan.\n11. Membawa peluit, kecuali petugas berwenang.\n12. Membawa senjata tajam atau benda berbahaya lainnya.\n13. Membawa alkohol atau narkotika/psikotropika.\n14. Membawa korek api atau pemantik ke ring 1 atau tribun.\n15. Melakukan vandalisme di area tribun.\n16. Membawa benda mudah terbakar seperti kembang api, petasan, smoke bomb, atau flare — denda Rp50 juta hingga Rp200 juta.\n17. Menggunakan alat laser — denda Rp20 juta per pemakaian.\n18. Melempar benda ke lapangan — denda minimal Rp20 juta.\n19. Menampilkan slogan menghina, provokatif, SARA, atau bermuatan politis — denda Rp20 juta per objek (maksimal 5).\n20. Menggunakan kata-kata atau bunyi yang menghina atau melecehkan.\n21. Masuk ke lapangan tanpa izin — denda Rp30-50 juta.\n22. Melakukan penjarahan — sanksi bagi individu dan klub.\n23. Melakukan kerusuhan seperti pembakaran atau perusakan — sanksi bagi klub dan larangan masuk stadion bagi individu minimal 10 bulan.\n24. Melakukan kekerasan seperti penganiayaan atau perkelahian — sanksi serupa bagi klub dan individu.\n\nSeluruh sanksi mengacu pada Kode Disiplin PSSI 2023.",
+                "back_to": "user_menu_utama"
+            },
+            "fasilitas_stadion_jalak": {
+                "id": "fasilitas_stadion_jalak",
+                "type": "menu_state",
+                "message": "Mau tahu fasilitas Stadion Jalak Harupat yang mana:\n\n1. Fasilitas Berdasarkan Tribun\n\n2. Fasilitas Toilet\n3. Fasilitas Ruang Ganti Pemain\n4. Fasilitas Ruang Medis\n0. Kembali ke Menu Utama",
+                "options": {
+                    "1": "fasilitas_tribun_stadion_jalak",
+                    "2": "fasilitas_toilet_stadion_jalak",
+                    "3": "fasilitas_ruang_ganti_pemain_stadion_jalak",
+                    "4": "fasilitas_ruang_medis_stadion_jalak",
+                    "0": "user_menu_utama"
+                }
+            },
+            "fasilitas_tribun_stadion_jalak": {
+                "id": "fasilitas_tribun_stadion_jalak",
+                "type": "menu_state",
+                "message": "Mau tahu fasilitas tribun yang mana?\n\n1. Tribun Timur\n2. Tribun Utara\n3. Tribun Selatan\n4. Tribun VIP Barat Utara dan Barat Selatan\n5. VIP Bawah\n6. Corporate Box\n0. Kembali ke Menu Utama",
+                "options": {
+                    "1": "fasilitas_tribun_jalak_timur",
+                    "2": "fasilitas_tribun_jalak_utara",
+                    "3": "fasilitas_tribun_jalak_selatan",
+                    "4": "fasilitas_tribun_jalak_vbu_vbs",
+                    "5": "fasilitas_tribun_jalak_vip_bawah",
+                    "6": "fasilitas_tribun_jalak_corporate",
+                    "0": "fasilitas_stadion_jalak"
+                }
+            },
+            "fasilitas_tribun_jalak_timur": {
+                "id": "fasilitas_tribun_jalak_timur",
+                "type": "terminal_state",
+                "action": "static",
+                "content": "Tribun Timur: Diperuntukkan untuk umum dan Viking Persib Club.",
+                "back_to": "user_menu_utama"
+            },
+            "fasilitas_tribun_jalak_utara": {
+                "id": "fasilitas_tribun_jalak_utara",
+                "type": "terminal_state",
+                "action": "static",
+                "content": "Tribun Utara: Diperuntukkan untuk umum dan NorthenWall.",
+                "back_to": "user_menu_utama"
+            },
+            "fasilitas_tribun_jalak_selatan": {
+                "id": "fasilitas_tribun_jalak_selatan",
+                "type": "terminal_state",
+                "action": "static",
+                "content": "Tribun Selatan: Diperuntukkan untuk umum dan Southside.",
+                "back_to": "user_menu_utama"
+            },
+            "fasilitas_tribun_jalak_vbu_vbs": {
+                "id": "fasilitas_tribun_jalak_vbu_vbs",
+                "type": "terminal_state",
+                "action": "static",
+                "content": "Tribun VIP Barat Utara dan Selatan: Dikhususkan untuk pemegang tiket VIP Barat Utara atau Barat Selatan.",
+                "back_to": "user_menu_utama"
+            },
+            "fasilitas_tribun_jalak_vip_bawah": {
+                "id": "fasilitas_tribun_jalak_vip_bawah",
+                "type": "terminal_state",
+                "action": "static",
+                "content": "VIP Bawah: Dikhususkan untuk pemegang tiket VIP Bawah dan mendapatkan fasilitas WiFI dan makanan ringan.",
+                "back_to": "user_menu_utama"
+            },
+            "fasilitas_tribun_jalak_corporate": {
+                "id": "fasilitas_tribun_jalak_corporate",
+                "type": "terminal_state",
+                "action": "static",
+                "content": "Corporate Box: Dikhusukan untuk pembeli Corporate seat dan pemegang Pasport Persib, mendapatkan fasilitas WiFI dan prasmanan.",
+                "back_to": "user_menu_utama"
+            },
+            "fasilitas_toilet_stadion_jalak": {
+                "id": "fasilitas_toilet_stadion_jalak",
+                "type": "terminal_state",
+                "action": "static",
+                "content": "Berikut merupakan Fasilitas Toilet yang ada di Stadion GBLA:\n\n1. Kloset Duduk\n2. Flush\n3. Tisu\n4. Semprotan air\n5. Wastafel\n6. Cermin\n7. Sabun\n8. Pengering tangan",
+                "back_to": "user_menu_utama"
+            },
+            "fasilitas_ruang_ganti_pemain_stadion_jalak": {
+                "id": "fasilitas_ruang_ganti_pemain_stadion_jalak",
+                "type": "menu_state",
+                "message": "Fasilitas ruang ganti mana yang ingin Anda ketahui?:\n\n1. Ruang Ganti (Home)\n2. Ruang Ganti (Away)\n0. Kembali ke Menu Utama",
+                "options": {
+                    "1": "ruang_ganti_home_jalak",
+                    "2": "ruang_ganti_away_jalak",
+                    "0": "user_menu_utama"
+                }
+            },
+            "ruang_ganti_home_jalak": {
+                "id": "ruang_ganti_home_jalak",
+                "type": "terminal_state",
+                "action": "static",
+                "content": "Fasilitas Ruang Ganti - Home:\n\n1. Minuman Isotonik\n2. Jersey",
+                "back_to": "user_menu_utama"
+            },
+            "ruang_ganti_away_jalak": {
+                "id": "ruang_ganti_away_jalak",
+                "type": "terminal_state",
+                "action": "static",
+                "content": "Fasilitas Ruang Ganti - Away:\n\n1. Minuman Isotonik",
+                "back_to": "user_menu_utama"
+            },
+            "fasilitas_ruang_medis_stadion_jalak": {
+                "id": "fasilitas_ruang_medis_stadion_jalak",
+                "type": "terminal_state",
+                "action": "static",
+                "content": "Berikut merupakan Fasilitas Ruang Medis yang ada di Stadion GBLA:\n\n1. Peralatan Pertolongan Pertama untuk umum\n2. Peralatan Pertolongan Pertama untuk Pemain",
+                "back_to": "user_menu_utama"
+            },
+            "info_parkir_stadion_jalak": {
+                "id": "info_parkir_stadion_jalak",
+                "type": "menu_state",
+                "message": "Silahkan pilih informasi mana yang ingin Anda ketahui tentang parkir kendaraan di Stadion Jalak Harupat?:\n\n1. Area Parkir Utara - Barat\n2. Area Parkir Timur - Selatan\n3. Area Parkir VVIP\n4. Metode Pembayaran Parkir\n0. Kembali ke Menu Utama",
+                "options": {
+                    "1": "parkir_utara_barat_jalak",
+                    "2": "parkir_timur_selatan_jalak",
+                    "3": "parkir_vvip_jalak",
+                    "4": "sistem_pembayaran_parkir_jalak",
+                    "0": "user_menu_utama"
+                }
+            },
+            "parkir_utara_barat_jalak": {
+                "id": "parkir_utara_barat_jalak",
+                "type": "terminal_state",
+                "action": "static",
+                "content": "Parkir Utara Barat diperuntukkan bagi akses terdekat menuju tribun Utara dan VIP Barat Utara.",
+                "back_to": "user_menu_utama"
+            },
+            "parkir_timur_selatan_jalak": {
+                "id": "parkir_timur_selatan_jalak",
+                "type": "terminal_state",
+                "action": "static",
+                "content": "Parkir Timur Selatan diperuntukkan bagi akses terdekat menuju tribun Timur, Selatan, dan VIP Barat Selatan.",
+                "back_to": "user_menu_utama"
+            },
+            "parkir_vvip_jalak": {
+                "id": "parkir_vvip_jalak",
+                "type": "terminal_state",
+                "action": "static",
+                "content": "Parkir VVIP diperuntukkan bagi akses terdekat, dan hanya untuk pemegang tiket tribun VIP Bawah dan Corporate Box.",
+                "back_to": "user_menu_utama"
+            },
+            "sistem_pembayaran_parkir_jalak": {
+                "id": "sistem_pembayaran_parkir_jalak",
+                "type": "terminal_state",
+                "action": "static",
+                "content": "Sistem Pembayaran Parkir Stadion Jalak Harupat:\n\n1. Tunai\n2. Kartu Uang Elektronik (e-Money, Flazz, Brizzi)\n3. Dompet Digital via QRIS (GoPay, Dana, OVO)",
                 "back_to": "user_menu_utama"
             },
             "sejarah": {
