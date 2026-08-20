@@ -3,3 +3,4 @@ venv/
 chatbot.db
 __pycache__
 node_modules/
+github-actions-key.json
