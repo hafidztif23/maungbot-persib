@@ -71,27 +71,39 @@ def get_all_merch() -> list:
         for row in rows
     ]
     
-def get_jadwal_pertandingan(status: str = None):
-    """Ambil semua jadwal, bisa difilter by status"""
+def get_jadwal_pertandingan(kompetisi: str = None, status: str = None):
+    """Ambil semua jadwal, bisa difilter berdasarkan kompetisi dan/atau status"""
+
+    query = """
+        SELECT id_jadwal, lawan, tanggal_jam, lokasi, kompetisi, status_pertandingan
+        FROM jadwal_pertandingan
+    """
+
+    conditions = []
+    params = {}
+
+    if kompetisi:
+        conditions.append(
+            "LOWER(CAST(kompetisi AS text)) LIKE LOWER(:kompetisi)"
+        )
+        params["kompetisi"] = f"%{kompetisi}%"
+
+    if status:
+        conditions.append(
+            "LOWER(CAST(status_pertandingan AS text)) = LOWER(:status)"
+        )
+        params["status"] = status
+
+    if conditions:
+        query += " WHERE " + " AND ".join(conditions)
+
+    query += " ORDER BY tanggal_jam ASC"
+
     with engine.connect() as conn:
-        if status:
-            rows = conn.execute(
-                text("""
-                    SELECT id_jadwal, lawan, tanggal_jam, lokasi, kompetisi, status_pertandingan
-                    FROM jadwal_pertandingan
-                    WHERE LOWER(CAST(status_pertandingan AS text)) = LOWER(:status)
-                    ORDER BY tanggal_jam ASC
-                """),
-                {"status": status}
-            ).mappings().all()
-        else:
-            rows = conn.execute(
-                text("""
-                    SELECT id_jadwal, lawan, tanggal_jam, lokasi, kompetisi, status_pertandingan
-                    FROM jadwal_pertandingan
-                    ORDER BY tanggal_jam ASC
-                """)
-            ).mappings().all()
+        rows = conn.execute(
+            text(query),
+            params
+        ).mappings().all()
 
     return [
         {

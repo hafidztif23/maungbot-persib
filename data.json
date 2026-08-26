@@ -32,12 +32,13 @@
             "jadwal": {
                 "id": "jadwal",
                 "type": "menu_state",
-                "message": "Mau lihat jadwal yang mana nih?:\n\n1. Jadwal Pertandingan Persib Selanjutnya\n2. Jadwal Pertandingan Berdasarkan Lawan Tanding\n3. List Jadwal Pertandingan Persib yang Akan Datang di Musim \n4. Hasil Pertandingan Persib yang Telah Selesai di Musim Ini\n0. Kembali ke Menu Utama",
+                "message": "Mau lihat jadwal yang mana nih?:\n\n1. Jadwal Pertandingan Persib Selanjutnya\n2. Jadwal Pertandingan Berdasarkan Lawan Tanding\n3. Jadwal Pertandingan Berdasarkan Kompetisi yang Diikuti Persib Musim Ini\n4. List Jadwal Pertandingan Persib yang Akan Datang di Musim Ini\n5. Hasil Pertandingan Persib yang Telah Selesai di Musim Ini\n0. Kembali ke Menu Utama",
                 "options": {
                     "1": "jadwal_terdekat",
                     "2": "jadwal_by_lawan_input",
-                    "3": "jadwal_semua_mendatang",
-                    "4": "jadwal_selesai",
+                    "3": "jadwal_berdasarkan_kompetisi_mendatang",
+                    "4": "jadwal_semua_mendatang",
+                    "5": "jadwal_selesai",
                     "0": "user_menu_utama"
                 }
             },
@@ -54,6 +55,36 @@
                 "message": "Silakan ketik nama tim lawan yang ingin dicari jadwalnya:",
                 "action": "get_jadwal_by_lawan",
                 "param_key": "nama_lawan",
+                "back_to": "user_menu_utama"
+            },
+            "jadwal_berdasarkan_kompetisi_mendatang": {
+                "id": "jadwal_berdasarkan_kompetisi_mendatang",
+                "type": "menu_state",
+                "message": "Mau lihat jadwal pertandingan Persib di kompetisi apa nih?:\n\n1. BRI Super League\n2. AFC Champions League Two\n0. Kembali ke Menu Utama",
+                "options": {
+                    "1": "jadwal_superleague_mendatang",
+                    "2": "jadwal_afc_cup_mendatang",
+                    "0": "user_menu_utama"
+                }
+            },
+            "jadwal_superleague_mendatang": {
+                "id": "jadwal_superleague_mendatang",
+                "type": "terminal_state",
+                "action": "get_jadwal_pertandingan",
+                "params": {
+                    "kompetisi": "BRI Super League",
+                    "status": "Selesai"
+                },
+                "back_to": "user_menu_utama"
+            },
+            "jadwal_afc_cup_mendatang": {
+                "id": "jadwal_afc_cup_mendatang",
+                "type": "terminal_state",
+                "action": "get_jadwal_pertandingan",
+                "params": {
+                    "kompetisi": "AFC Champions League Two",
+                    "status": "Selesai"
+                },
                 "back_to": "user_menu_utama"
             },
             "jadwal_semua_mendatang": {

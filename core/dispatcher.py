@@ -19,8 +19,9 @@ def _route(action: str, params: dict, id_account: int) -> dict | list | str | No
         return db.get_jadwal_terdekat()
 
     if action in ("get_jadwal_pertandingan", "get_jadwal_mendatang", "get_jadwal_selesai"):
+        kompetisi = params.get("kompetisi")
         status = params.get("status")
-        return db.get_jadwal_pertandingan(status=status)
+        return db.get_jadwal_pertandingan(kompetisi=kompetisi, status=status)
 
     if action == "get_jadwal_by_lawan":
         nama_lawan = params.get("nama_lawan", "").strip()
