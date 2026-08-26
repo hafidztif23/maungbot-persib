@@ -73,7 +73,7 @@
                 "action": "get_jadwal_pertandingan",
                 "params": {
                     "kompetisi": "BRI Super League",
-                    "status": "Selesai"
+                    "status": "Akan Datang"
                 },
                 "back_to": "user_menu_utama"
             },
@@ -83,7 +83,7 @@
                 "action": "get_jadwal_pertandingan",
                 "params": {
                     "kompetisi": "AFC Champions League Two",
-                    "status": "Selesai"
+                    "status": "Akan Datang"
                 },
                 "back_to": "user_menu_utama"
             },
