@@ -17,11 +17,11 @@ def format_response(action: str, result: Any) -> str:
     if action == "get_harga_tiket":
         return _format_harga_tiket(result)
 
-    if action == "check_merch_stock":
-        return _format_merch_single(result)
+    if action == "get_produk_by_kategori":
+        return _format_produk_kategori(result)
 
-    if action == "get_all_merch":
-        return _format_merch_all(result)
+    if action == "get_produk_by_nama":
+        return _format_produk_nama(result)
 
     if action in ("get_pemain_by_nama", "get_pemain_by_posisi",
                   "get_pemain_by_status"):
@@ -103,34 +103,64 @@ def _format_harga_tiket(result) -> str:
     return "\n".join(lines)
 
 
-def _format_merch_single(result) -> str:
-    if not result:
-        return "Maaf, data merchandise tidak ditemukan."
+def _format_satu_produk(item: dict) -> str:
+    """Format satu produk beserta varian ukurannya (dipakai di list kategori & pencarian tunggal)."""
+    harga_str = f"Rp {item['harga']:,.0f}".replace(",", ".")
+    lines = [f"{item['nama_produk']} — {harga_str}"]
 
-    name = result.get("name", "-")
-    stock = result.get("stock", 0)
-    harga = result.get("harga", 0)
-    status = "Tersedia" if stock > 0 else "Habis"
+    varian = item.get("varian", [])
+    if not varian:
+        lines.append("   Stok tidak tersedia.")
+        return "\n".join(lines)
 
-    return (
-        f"{name}\n"
-        f" Stok   : {stock} pcs | {status}\n"
-        f" Harga  : Rp {harga:,.0f}"
-    )
+    # Deteksi apakah produk ini bertipe "Tanpa Ukuran" (mis. aksesoris)
+    if len(varian) == 1 and varian[0]["nama_kategori_ukuran"] == "Tanpa Ukuran":
+        lines.append(f"   Stok: {varian[0]['stok']} pcs")
+    else:
+        lines.append("   Stok per ukuran:")
+        for v in varian:
+            lines.append(f"     - {v['size']}: {v['stok']} pcs")
 
-
-def _format_merch_all(result) -> str:
-    if not result:
-        return "Tidak ada data merchandise."
-
-    lines = ["Semua Merchandise Persib:\n"]
-    for item in result:
-        name = item.get("name", "-")
-        stock = item.get("stock", 0)
-        harga = item.get("harga", 0)
-        status = "Tersedia" if stock > 0 else "Tidak tersedia"
-        lines.append(f"   {status} {name} — Rp {harga:,.0f} (stok: {stock})")
     return "\n".join(lines)
+
+
+def _format_produk_kategori(result) -> str:
+    if not result:
+        return "Tidak ada produk yang tersedia pada kategori ini."
+
+    lines = ["Daftar Merchandise Persib Bandung:\n"]
+    for item in result:
+        lines.append(_format_satu_produk(item))
+
+    return "\n\n".join(lines)
+
+
+def _format_produk_nama(result: dict) -> str:
+    status = result.get("status")
+
+    if status == "empty":
+        return "Silakan ketik nama produk yang ingin dicari."
+
+    if status == "not_found":
+        return "Maaf, produk dengan nama tersebut tidak ditemukan. Coba gunakan kata kunci lain."
+
+    if status == "too_many":
+        return (
+            "Hasil pencarian terlalu banyak. Coba gunakan nama produk yang lebih spesifik, "
+            "misalnya sertakan jenis (jersey/topi/scarf) dan musimnya."
+        )
+
+    if status == "single":
+        return "Produk ditemukan:\n\n" + _format_satu_produk(result["produk"])
+
+    if status == "multiple":
+        lines = ["Beberapa produk ditemukan, silakan cari dengan nama yang lebih spesifik:\n"]
+        for p in result["produk"]:
+            harga_str = f"Rp {p['harga']:,.0f}".replace(",", ".")
+            lines.append(f"- {p['nama_produk']} — {harga_str}")
+        return "\n".join(lines)
+
+    return "Terjadi kesalahan saat memproses pencarian."
 
 
 def _format_pemain(result) -> str:

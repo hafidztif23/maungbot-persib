@@ -10,6 +10,7 @@ DB_USER = os.getenv("DB_USER", "postgres")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
 DB_NAME = os.getenv("DB_NAME", "maungbot")
 DATABASE_URL = os.getenv("DATABASE_URL")
+MAX_HASIL_PENCARIAN_PRODUK = 5
 
 if INSTANCE_CONNECTION_NAME and DB_PASSWORD:
     # Production: pakai Cloud SQL Python Connecto
@@ -40,36 +41,103 @@ else:
     )
     print("⚠ Menggunakan SQLite (development)")
 
-def check_merch_stock(item_name: str):
-    """Ambil stok merchandise langsung dari DB."""
-    item_name = item_name.strip().title()
+def _get_varian_produk(conn, id_produk: int):
+    """Ambil breakdown varian ukuran + stok untuk satu produk."""
+    rows = conn.execute(
+        text("""
+            SELECT u.size, ku.nama_kategori_ukuran, pu.stok
+            FROM produk_ukuran pu
+            JOIN ukuran u ON u.id_ukuran = pu.id_ukuran
+            JOIN kategori_ukuran ku ON ku.id_kategori_ukuran = u.id_kategori_ukuran
+            WHERE pu.id_produk = :id_produk
+            ORDER BY u.size
+        """),
+        {"id_produk": id_produk}
+    ).mappings().all()
+    return [dict(r) for r in rows]
+
+
+def get_produk_by_kategori(kode_kategori: str):
+    """Ambil semua produk dalam satu kategori beserta varian ukurannya."""
     with engine.connect() as conn:
-        rows = conn.execute(
-            text("SELECT name, stock, harga_merchandise FROM merchandise WHERE name = :name"),
-            {"name": item_name}
-        ).mappings().fetchone()
-    if rows:
-        return {
-            "name": rows["name"],
-            "stock": rows["stock"],
-            "harga": rows.get("harga_merchandise") or 0
-            }
-    return None
-    
-def get_all_merch() -> list:
-    """Ambil semua merchandise dari DB."""
-    with engine.connect() as conn:
-        rows = conn.execute(
-            text("SELECT name, stock, harga_merchandise FROM merchandise")
+        produk_rows = conn.execute(
+            text("""
+                SELECT DISTINCT p.id_produk, p.kode_produk, p.nama_produk, p.harga
+                FROM produk p
+                JOIN kategori_produk_produk kpp ON kpp.id_produk = p.id_produk
+                JOIN kategori_produk kp ON kp.id_kategori_produk = kpp.id_kategori_produk
+                WHERE kp.kode_kategori_produk = :kode_kategori
+                  AND p.status = TRUE
+                ORDER BY p.nama_produk
+            """),
+            {"kode_kategori": kode_kategori}
         ).mappings().all()
-    return [
-        {
-            "name": row["name"],
-            "stock": row["stock"],
-            "harga": row.get("harga_merchandise") or 0
+
+        if not produk_rows:
+            return None
+
+        result = []
+        for p in produk_rows:
+            result.append({
+                "kode_produk": p["kode_produk"],
+                "nama_produk": p["nama_produk"],
+                "harga": p["harga"],
+                "varian": _get_varian_produk(conn, p["id_produk"])
+            })
+
+    return result
+
+
+def get_produk_by_nama(query: str):
+    """Cari produk berdasarkan nama menggunakan pencocokan token (semua kata harus ada)."""
+    tokens = [t.strip() for t in query.strip().split() if t.strip()]
+    if not tokens:
+        return {"status": "empty"}
+
+    patterns = [f"%{t}%" for t in tokens]
+
+    with engine.connect() as conn:
+        rows = conn.execute(
+            text("""
+                SELECT id_produk, kode_produk, nama_produk, harga
+                FROM produk
+                WHERE nama_produk ILIKE ALL(:patterns)
+                  AND status = TRUE
+                ORDER BY nama_produk
+                LIMIT :limit
+            """),
+            {"patterns": patterns, "limit": MAX_HASIL_PENCARIAN_PRODUK + 1}
+        ).mappings().all()
+
+        if not rows:
+            return {"status": "not_found"}
+
+        if len(rows) > MAX_HASIL_PENCARIAN_PRODUK:
+            return {"status": "too_many"}
+
+        if len(rows) == 1:
+            produk = rows[0]
+            return {
+                "status": "single",
+                "produk": {
+                    "kode_produk": produk["kode_produk"],
+                    "nama_produk": produk["nama_produk"],
+                    "harga": produk["harga"],
+                    "varian": _get_varian_produk(conn, produk["id_produk"])
+                }
+            }
+
+        return {
+            "status": "multiple",
+            "produk": [
+                {
+                    "kode_produk": r["kode_produk"],
+                    "nama_produk": r["nama_produk"],
+                    "harga": r["harga"]
+                }
+                for r in rows
+            ]
         }
-        for row in rows
-    ]
     
 def get_jadwal_pertandingan(kompetisi: str = None, status: str = None):
     """Ambil semua jadwal, bisa difilter berdasarkan kompetisi dan/atau status"""

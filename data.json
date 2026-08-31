@@ -165,49 +165,116 @@
             "merchandise": {
                 "id": "merchandise",
                 "type": "menu_state",
-                "message": "Informasi Merchandise apa yang ingin Anda ketahui?:\n\n1. Daftar dan ketersediaan Merchandise\n2. Cara Pembelian Merchandise\n0. Kembali ke Menu Utama",
+                "message": "Informasi Merchandise apa yang ingin Anda ketahui?:\n\n1. Daftar & Ketersediaan Merchandise Berdasarkan Kategori Produk\n2. Cari Merchandise Berdasarkan Nama Produk\n3. Cara Pembelian Merchandise\n0. Kembali ke Menu Utama",
                 "options": {
-                    "1": "check_merch_stock",
-                    "2": "cara_pembelian_merchandise",
-                    "0": "user_menu_utama"
+                "1": "merch_kategori",
+                "2": "merch_cari_nama_input",
+                "3": "cara_pembelian_merchandise",
+                "0": "user_menu_utama"
                 }
             },
-            "check_merch_stock": {
-                "id": "check_merch_stock",
+            "merch_kategori": {
+                "id": "merch_kategori",
                 "type": "menu_state",
-                "message": "Mau cek kategori Merchandise yang mana?:\n\n1. Jersey Persib 2025\n2. Topi Persib\n3. Scarf Maung Bandung\n0. Kembali ke Menu Utama",
+                "message": "Mau lihat kategori merchandise yang mana?:\n\n1. Jersey GK 2025/2026\n2. Jersey Alternate 2025/2026\n3. Jersey Away 2025/2026\n4. Jersey Home 2025/2026\n5. Official 25-26\n6. Champions Series\n7. Kolaborasib\n8. Anak-Anak\n9. Atasan\n10. Celana\n11. Aksesoris\n0. Kembali ke Menu Utama",
                 "options": {
-                    "1": "merch_jersey",
-                    "2": "merch_topi",
-                    "3": "merch_scarf",
-                    "0": "user_menu_utama"
+                "1": "merch_kategori_jersey_gk",
+                "2": "merch_kategori_jersey_alt",
+                "3": "merch_kategori_jersey_away",
+                "4": "merch_kategori_jersey_home",
+                "5": "merch_kategori_official",
+                "6": "merch_kategori_champions",
+                "7": "merch_kategori_kolaborasib",
+                "8": "merch_kategori_anak",
+                "9": "merch_kategori_atasan",
+                "10": "merch_kategori_celana",
+                "11": "merch_kategori_aksesoris",
+                "0": "merchandise"
                 }
             },
-            "merch_jersey": {
-                "id": "merch_jersey",
+            "merch_kategori_jersey_gk": {
+                "id": "merch_kategori_jersey_gk",
                 "type": "terminal_state",
-                "action": "check_merch_stock",
-                "params": {
-                    "name": "Jersey Persib 2025"
-                },
+                "action": "get_produk_by_kategori",
+                "params": { "kode_kategori": "JSY-GK" },
                 "back_to": "user_menu_utama"
             },
-            "merch_topi": {
-                "id": "merch_topi",
+            "merch_kategori_jersey_alt": {
+                "id": "merch_kategori_jersey_alt",
                 "type": "terminal_state",
-                "action": "check_merch_stock",
-                "params": {
-                    "name": "Topi Persib"
-                },
+                "action": "get_produk_by_kategori",
+                "params": { "kode_kategori": "JSY-ALT" },
                 "back_to": "user_menu_utama"
             },
-            "merch_scarf": {
-                "id": "merch_scarf",
+            "merch_kategori_jersey_away": {
+                "id": "merch_kategori_jersey_away",
                 "type": "terminal_state",
-                "action": "check_merch_stock",
-                "params": {
-                    "name": "Scarf Maung Bandung"
-                },
+                "action": "get_produk_by_kategori",
+                "params": { "kode_kategori": "JSY-AWY" },
+                "back_to": "user_menu_utama"
+            },
+            "merch_kategori_jersey_home": {
+                "id": "merch_kategori_jersey_home",
+                "type": "terminal_state",
+                "action": "get_produk_by_kategori",
+                "params": { "kode_kategori": "JSY-HOM" },
+                "back_to": "user_menu_utama"
+            },
+            "merch_kategori_official": {
+                "id": "merch_kategori_official",
+                "type": "terminal_state",
+                "action": "get_produk_by_kategori",
+                "params": { "kode_kategori": "OFC-2526" },
+                "back_to": "user_menu_utama"
+            },
+            "merch_kategori_champions": {
+                "id": "merch_kategori_champions",
+                "type": "terminal_state",
+                "action": "get_produk_by_kategori",
+                "params": { "kode_kategori": "CHP-SRS" },
+                "back_to": "user_menu_utama"
+            },
+            "merch_kategori_kolaborasib": {
+                "id": "merch_kategori_kolaborasib",
+                "type": "terminal_state",
+                "action": "get_produk_by_kategori",
+                "params": { "kode_kategori": "KLB-SIB" },
+                "back_to": "user_menu_utama"
+            },
+            "merch_kategori_anak": {
+                "id": "merch_kategori_anak",
+                "type": "terminal_state",
+                "action": "get_produk_by_kategori",
+                "params": { "kode_kategori": "ANK-ANK" },
+                "back_to": "user_menu_utama"
+            },
+            "merch_kategori_atasan": {
+                "id": "merch_kategori_atasan",
+                "type": "terminal_state",
+                "action": "get_produk_by_kategori",
+                "params": { "kode_kategori": "ATS-UMM" },
+                "back_to": "user_menu_utama"
+            },
+            "merch_kategori_celana": {
+                "id": "merch_kategori_celana",
+                "type": "terminal_state",
+                "action": "get_produk_by_kategori",
+                "params": { "kode_kategori": "CLN-UMM" },
+                "back_to": "user_menu_utama"
+            },
+            "merch_kategori_aksesoris": {
+                "id": "merch_kategori_aksesoris",
+                "type": "terminal_state",
+                "action": "get_produk_by_kategori",
+                "params": { "kode_kategori": "AKS-SOR" },
+                "back_to": "user_menu_utama"
+            },
+            "merch_cari_nama_input": {
+                "id": "merch_cari_nama_input",
+                "type": "transitional_state",
+                "message": "Silakan ketik nama produk yang ingin dicari (contoh: jersey away, official 25-26):",
+                "action": "get_produk_by_nama",
+                "param_key": "nama_produk",
                 "back_to": "user_menu_utama"
             },
             "cara_pembelian_merchandise": {

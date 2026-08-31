@@ -43,12 +43,13 @@ def _route(action: str, params: dict, id_account: int) -> dict | list | str | No
         nama_lawan = params.get("nama_lawan", "").strip()
         return db.get_stok_tiket_by_lawan(nama_lawan)
 
-    if action == "check_merch_stock":
-        name = params.get("name", "").strip()
-        return db.check_merch_stock(name)
+    if action == "get_produk_by_kategori":
+        kode_kategori = params.get("kode_kategori", "").strip()
+        return db.get_produk_by_kategori(kode_kategori)
 
-    if action == "get_all_merch":
-        return db.get_all_merch()
+    if action == "get_produk_by_nama":
+        nama = params.get("nama_produk", "").strip()
+        return db.get_produk_by_nama(nama)
 
     if action == "get_pemain_by_nama":
         nama = params.get("nama_pemain", "").strip()
