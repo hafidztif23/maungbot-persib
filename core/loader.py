@@ -1,6 +1,6 @@
-import json
+from sqlalchemy import text
+from core.db import engine
 import logging
-from pathlib import Path
 
 logging.basicConfig(
     level=logging.INFO,
@@ -16,31 +16,42 @@ REQUIRED_FIELDS = {
     "transitional_state": ["message", "action", "param_key", "back_to"],
 }
 
-def load_tree(path: str = "data.json") -> dict:
+def load_tree() -> dict:
     global _nodes
 
-    file_path = Path(path)
-    if not file_path.exists():
-        raise RuntimeError(f"data.json tidak ditemukan di path: {file_path.resolve()}")
+    with engine.connect() as conn:
+        rows = conn.execute(text("SELECT * FROM fsm_node")).mappings().all()
 
-    with open(file_path, "r", encoding="utf-8") as f:
-        raw = json.load(f)
+    if not rows:
+        raise RuntimeError("Tabel fsm_node kosong. Belum ada node yang terdaftar.")
 
-    if isinstance(raw, list):
-        raw = raw[0]
+    nodes = {}
+    for row in rows:
+        node = dict(row)
+        node_id = node["id"]
+        entry = {"id": node_id, "type": node["type"]}
 
-    if "nodes" not in raw:
-        raise RuntimeError("data.json tidak memiliki key 'nodes'")
+        if node["message"] is not None:
+            entry["message"] = node["message"]
+        if node["options"] is not None:
+            entry["options"] = node["options"]
+        if node["action"] is not None:
+            entry["action"] = node["action"]
+        if node["params"] is not None:
+            entry["params"] = node["params"]
+        if node["content"] is not None:
+            entry["content"] = node["content"]
+        if node["param_key"] is not None:
+            entry["param_key"] = node["param_key"]
+        if node["back_to"] is not None:
+            entry["back_to"] = node["back_to"]
 
-    nodes = raw["nodes"]
+        nodes[node_id] = entry
 
-    if not nodes:
-        raise RuntimeError("'nodes' kosong di data.json")
-
-    _validate(nodes)
+    _validate(nodes)   # fungsi validasi existing — TIDAK DIUBAH
 
     _nodes = nodes
-    logger.info(f"Total {len(nodes)} node berhasil di-load dan divalidasi.")
+    logger.info(f"Total {len(nodes)} node berhasil di-load dari database dan divalidasi.")
     return _nodes
 
 def get_nodes() -> dict:

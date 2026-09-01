@@ -2,11 +2,11 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from core.loader import load_tree
-from routes import auth, chat
+from routes import auth, chat, fsm_admin
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    load_tree("data.json")
+    load_tree()
     yield
 
 app = FastAPI(
@@ -26,6 +26,7 @@ app.add_middleware(
 
 app.include_router(auth.router)
 app.include_router(chat.router)
+app.include_router(fsm_admin.router)
 
 @app.get("/")
 def root():
