@@ -1,0 +1,1124 @@
+/* ==========================================================================
+   FSM Admin Control Center - Modern Responsive Dashboard Stylesheet
+   ========================================================================== */
+
+/* Keyframe Animations */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.spin-icon {
+  animation: spin 1s linear infinite;
+}
+
+/* Page Container */
+.fsm-admin-page {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  color: #f3f4f6;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  animation: fadeIn 0.35s ease-out;
+}
+
+/* Base Card Styling (Dashboard Card) */
+.app-card {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  transition: all 0.25s ease;
+}
+
+/* Hero Banner Section */
+.fsm-admin-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 28px 32px;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 58, 138, 0.4) 50%, rgba(15, 23, 42, 0.95) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.fsm-admin-hero::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.18) 0%, rgba(0, 0, 0, 0) 70%);
+  pointer-events: none;
+}
+
+.fsm-admin-hero-content {
+  max-width: 800px;
+}
+
+.fsm-admin-badge-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #93c5fd;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+.hero-persib-logo {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.fsm-admin-hero h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #ffffff;
+  background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.fsm-admin-subtitle {
+  margin: 10px 0 0;
+  color: #94a3b8;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.fsm-admin-hero-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Button Customizations */
+.fsm-admin-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 12px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+  transition: all 0.2s ease;
+}
+
+.fsm-admin-primary-btn:hover {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+}
+
+.fsm-admin-secondary-btn,
+.fsm-admin-danger-btn,
+.fsm-admin-mini-btn,
+.fsm-admin-remove-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.fsm-admin-secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.fsm-admin-secondary-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.fsm-admin-danger-btn {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.25);
+  color: #fca5a5;
+}
+
+.fsm-admin-danger-btn:hover {
+  background: rgba(239, 68, 68, 0.22);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #ffffff;
+}
+
+.fsm-admin-mini-btn {
+  padding: 8px 14px;
+  font-size: 13px;
+  border-radius: 10px;
+}
+
+.fsm-admin-mini-btn.primary {
+  background: rgba(37, 99, 235, 0.16);
+  border-color: rgba(59, 130, 246, 0.3);
+  color: #bfdbfe;
+}
+
+.fsm-admin-mini-btn.primary:hover {
+  background: rgba(37, 99, 235, 0.28);
+  color: #ffffff;
+}
+
+.fsm-admin-remove-btn {
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+}
+
+.fsm-admin-remove-btn:hover {
+  background: rgba(239, 68, 68, 0.25);
+  color: #ffffff;
+}
+
+/* Stats Overview Cards */
+.fsm-admin-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.fsm-admin-stat {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 22px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.fsm-admin-stat:hover {
+  transform: translateY(-3px);
+  border-color: rgba(59, 130, 246, 0.3);
+  background: rgba(30, 41, 59, 0.85);
+}
+
+.fsm-admin-stat.stat-active {
+  border-color: rgba(59, 130, 246, 0.5);
+  background: linear-gradient(180deg, rgba(30, 58, 138, 0.35) 0%, rgba(15, 23, 42, 0.85) 100%);
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.15);
+}
+
+.fsm-admin-stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.fsm-admin-stat-header span {
+  font-size: 13px;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.fsm-admin-stat-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.all-icon {
+  background: rgba(148, 163, 184, 0.15);
+  color: #cbd5e1;
+}
+
+.menu-icon {
+  background: rgba(37, 99, 235, 0.15);
+  color: #60a5fa;
+}
+
+.terminal-icon {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+}
+
+.trans-icon {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+}
+
+.fsm-admin-stat strong {
+  font-size: 30px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.fsm-admin-stat-footer {
+  margin-top: 10px;
+}
+
+.stat-pct,
+.stat-subtext {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.fsm-admin-stat.stat-active .stat-pct,
+.fsm-admin-stat.stat-active .stat-subtext {
+  color: #93c5fd;
+}
+
+/* Status Alert */
+.fsm-admin-alert {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  animation: fadeIn 0.2s ease;
+}
+
+.fsm-admin-alert-icon {
+  flex-shrink: 0;
+}
+
+.fsm-admin-alert-close {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: inherit;
+  opacity: 0.7;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.fsm-admin-alert-close:hover {
+  opacity: 1;
+}
+
+.fsm-admin-alert.info {
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #bfdbfe;
+}
+
+.fsm-admin-alert.success {
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #bbf7d0;
+}
+
+.fsm-admin-alert.warning {
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #fde68a;
+}
+
+.fsm-admin-alert.error {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fecaca;
+}
+
+/* Mobile Tabs Switcher */
+.fsm-admin-mobile-tabs {
+  display: none;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.6);
+  padding: 6px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mobile-tab-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobile-tab-btn.active {
+  background: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* Workspace Grid System (2 Columns: Wide 340px Sidebar + Full Flex Editor) */
+.fsm-admin-grid {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.fsm-admin-panel {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fsm-admin-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.panel-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.panel-icon {
+  color: #60a5fa;
+}
+
+.fsm-admin-panel-header h2 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.node-count-badge {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+/* Panel 1: Node List Controls */
+.fsm-admin-filter-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fsm-admin-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.fsm-admin-search-wrapper .search-icon {
+  position: absolute;
+  left: 14px;
+  color: #64748b;
+  pointer-events: none;
+}
+
+.fsm-admin-search-wrapper input {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 11px 34px 11px 40px;
+  color: #ffffff;
+  font-size: 13.5px;
+  transition: all 0.2s ease;
+}
+
+.fsm-admin-search-wrapper input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.search-clear-btn {
+  position: absolute;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.fsm-admin-type-filters {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.filter-pill {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.filter-pill:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+}
+
+.filter-pill.active {
+  background: rgba(37, 99, 235, 0.2);
+  border-color: rgba(59, 130, 246, 0.4);
+  color: #93c5fd;
+}
+
+.fsm-admin-node-list-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: calc(100vh - 360px);
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.fsm-admin-node-list-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.fsm-admin-node-list-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+/* Node List Items */
+.fsm-admin-node-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 14px;
+  padding: 14px 16px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.fsm-admin-node-item:hover {
+  border-color: rgba(59, 130, 246, 0.3);
+  background: rgba(30, 41, 59, 0.7);
+  transform: translateX(3px);
+}
+
+.fsm-admin-node-item.active {
+  border-color: rgba(59, 130, 246, 0.5);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.18) 0%, rgba(15, 23, 42, 0.85) 100%);
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.18);
+}
+
+.fsm-admin-node-item-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.node-id {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #ffffff;
+  word-break: break-all;
+}
+
+.node-snippet {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 12.5px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.node-item-footer {
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.options-count {
+  font-size: 11px;
+  color: #60a5fa;
+  background: rgba(59, 130, 246, 0.1);
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Badges */
+.fsm-admin-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.fsm-admin-badge.menu_state {
+  background: rgba(37, 99, 235, 0.16);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #93c5fd;
+}
+
+.fsm-admin-badge.terminal_state {
+  background: rgba(34, 197, 94, 0.14);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #86efac;
+}
+
+.fsm-admin-badge.transitional_state {
+  background: rgba(245, 158, 11, 0.14);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #fde047;
+}
+
+/* Empty State Box */
+.fsm-admin-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 36px 16px;
+  color: #64748b;
+  gap: 12px;
+}
+
+.fsm-admin-empty-state p {
+  margin: 0;
+  font-size: 13.5px;
+}
+
+/* Panel 2: Form Editor Layout */
+.fsm-admin-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.section-subtitle {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-subtitle svg {
+  color: #3b82f6;
+}
+
+.fsm-admin-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.fsm-admin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.field-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #cbd5e1;
+}
+
+.required {
+  color: #ef4444;
+}
+
+.fsm-admin-field input,
+.fsm-admin-field select,
+.fsm-admin-field textarea,
+.option-input-group input,
+.option-target-group select {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.85);
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.fsm-admin-field textarea {
+  resize: vertical;
+  min-height: 110px;
+  line-height: 1.6;
+}
+
+.fsm-admin-field textarea.static-content-textarea {
+  min-height: 260px;
+}
+
+.code-textarea {
+  font-family: "Fira Code", "Courier New", monospace;
+  font-size: 13px;
+  background: rgba(10, 15, 28, 0.95);
+  color: #93c5fd;
+}
+
+.input-error {
+  border-color: rgba(239, 68, 68, 0.6) !important;
+  background: rgba(239, 68, 68, 0.05) !important;
+}
+
+.fsm-admin-field input:focus,
+.fsm-admin-field select:focus,
+.fsm-admin-field textarea:focus,
+.option-input-group input:focus,
+.option-target-group select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.fsm-admin-field input:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  background: rgba(15, 23, 42, 0.5);
+}
+
+.field-hint {
+  font-size: 11.5px;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+.field-hint code {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #93c5fd;
+}
+
+.form-notice-box {
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+.form-notice-box .text-info {
+  color: #93c5fd;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.field-error-msg {
+  font-size: 12px;
+  color: #fca5a5;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 4px;
+}
+
+.fsm-admin-span-2 {
+  grid-column: 1 / -1;
+}
+
+/* Menu Option Rows */
+.fsm-admin-options-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.fsm-admin-options-header p {
+  margin: 2px 0 0 0;
+  font-size: 12.5px;
+  color: #94a3b8;
+}
+
+.options-rows-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fsm-admin-option-row {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  background: rgba(15, 23, 42, 0.7);
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.option-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.option-num-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.option-target-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.arrow-icon {
+  color: #3b82f6;
+  flex-shrink: 0;
+}
+
+/* Actions Footer */
+.fsm-admin-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ==========================================================================
+   Responsive Breakpoints & Layout Adaptations
+   ========================================================================== */
+
+@media (max-width: 1100px) {
+  .fsm-admin-mobile-tabs {
+    display: flex;
+  }
+
+  .fsm-admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fsm-admin-panel {
+    display: none;
+  }
+
+  .fsm-admin-panel.mobile-show {
+    display: flex;
+    animation: fadeIn 0.25s ease-out;
+  }
+}
+
+@media (max-width: 900px) {
+  .fsm-admin-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .fsm-admin-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+  }
+
+  .fsm-admin-hero-actions {
+    width: 100%;
+  }
+
+  .fsm-admin-hero-actions button {
+    flex: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .fsm-admin-page {
+    gap: 16px;
+  }
+
+  .fsm-admin-hero h1 {
+    font-size: 24px;
+  }
+
+  .fsm-admin-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .fsm-admin-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fsm-admin-span-2 {
+    grid-column: auto;
+  }
+
+  .fsm-admin-option-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .option-target-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .arrow-icon {
+    display: none;
+  }
+
+  .fsm-admin-actions {
+    flex-direction: column;
+  }
+
+  .fsm-admin-actions button {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   SearchableSelect Component (Custom Combobox with search/filter)
+   ========================================================================== */
+.ss-wrapper {
+  position: relative;
+  width: 100%;
+  outline: none;
+}
+
+/* Trigger button (looks like a select) */
+.ss-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: #f3f4f6;
+  font-size: 13.5px;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  user-select: none;
+  min-height: 42px;
+}
+
+.ss-trigger:hover {
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+.ss-trigger.open {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.ss-trigger-text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ss-trigger-text.placeholder {
+  color: #64748b;
+}
+
+.ss-chevron {
+  font-size: 10px;
+  color: #64748b;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+/* Dropdown panel */
+.ss-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: #1e293b;
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  animation: fadeIn 0.15s ease-out;
+}
+
+/* Search input inside dropdown */
+.ss-search-row {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.ss-search-input {
+  width: 100%;
+  padding: 8px 12px;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 8px;
+  color: #f3f4f6;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.ss-search-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.ss-search-input::placeholder {
+  color: #475569;
+}
+
+/* Options list */
+.ss-list {
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.ss-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.ss-list::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.4);
+  border-radius: 4px;
+}
+
+/* Individual option */
+.ss-option {
+  padding: 9px 16px;
+  font-size: 13px;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ss-option:hover {
+  background: rgba(59, 130, 246, 0.15);
+  color: #fff;
+}
+
+.ss-option.selected {
+  background: rgba(59, 130, 246, 0.25);
+  color: #60a5fa;
+  font-weight: 600;
+}
+
+.ss-option.ss-no-result {
+  color: #475569;
+  cursor: default;
+  font-style: italic;
+}
+
+.ss-option.ss-no-result:hover {
+  background: transparent;
+  color: #475569;
+}

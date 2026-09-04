@@ -6,3 +6,4 @@ cloud-sql-python-connector[pg8000]
 python-jose[cryptography]
 passlib[bcrypt]
 email-validator
+gspread

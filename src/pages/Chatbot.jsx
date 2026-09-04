@@ -62,7 +62,7 @@ function Chatbot() {
 
   const handleSendMessage = async (e, messageText = null) => {
     if (e) e.preventDefault()
-    
+
     const textToSend = messageText || inputMessage
     if (textToSend.trim() === '' || textToSend.length > 500) return
 
@@ -85,7 +85,7 @@ function Chatbot() {
     try {
       // Kirim ke API HFSM
       const response = await chatAPI.sendMessage(textToSend)
-      
+
       // Tambah respons bot
       const botResponse = {
         id: Date.now() + 1,
@@ -96,7 +96,7 @@ function Chatbot() {
       setMessages(prevMessages => [...prevMessages, botResponse])
     } catch (error) {
       console.error('Chat error:', error)
-      
+
       // Tambah error message
       const errorMessage = {
         id: Date.now() + 1,
@@ -131,15 +131,17 @@ function Chatbot() {
   return (
     <div className="cb-main">
       {/* Sidebar Overlay for Mobile */}
-      <div 
-        className={`cb-sidebar-overlay ${isSidebarOpen ? 'visible' : ''}`} 
+      <div
+        className={`cb-sidebar-overlay ${isSidebarOpen ? 'visible' : ''}`}
         onClick={() => setIsSidebarOpen(false)}
       />
 
       {/* Sidebar */}
       <aside className={`cb-sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <div className="cb-sidebar-header">
-          <div className="cb-bot-icon">🤖</div>
+          <div className="cb-bot-icon">
+            <img src={PersibLogo} alt="Persib Logo" className="cb-bot-logo-img" />
+          </div>
           <div className="cb-bot-title">
             <h3>MAUNG BOT</h3>
             <p>Powered by HFSM</p>
@@ -181,7 +183,7 @@ function Chatbot() {
         <header className="cb-top-header">
           <button className="cb-menu-toggle-btn" onClick={() => setIsSidebarOpen(true)} aria-label="Buka Menu">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
             </svg>
           </button>
           <div className="cb-header-title">
@@ -189,7 +191,7 @@ function Chatbot() {
           </div>
           <button className="cb-header-new-chat" onClick={resetToWelcome} title="Obrolan Baru">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
             </svg>
           </button>
         </header>
@@ -208,8 +210,8 @@ function Chatbot() {
               Layanan customer service resmi Persib Bandung berbasis HFSM.
             </p>
 
-            <button 
-              className="cb-new-chat-btn" 
+            <button
+              className="cb-new-chat-btn"
               onClick={startChatSession}
               disabled={isLoading}
               style={{ marginTop: '16px', padding: '14px 28px', fontSize: '15px' }}
@@ -222,8 +224,8 @@ function Chatbot() {
           <div className="cb-chat-view">
             <div className="cb-messages-container">
               {messages.map((message) => (
-                <div 
-                  key={message.id} 
+                <div
+                  key={message.id}
                   className={`cb-message ${message.sender === 'user' ? 'cb-user-message' : 'cb-bot-message'}`}
                 >
                   {message.sender === 'bot' && (
@@ -273,11 +275,11 @@ function Chatbot() {
               disabled={isLoading}
             />
             {inputMessage.length > 400 && (
-              <span style={{ 
-                position: 'absolute', 
-                right: '12px', 
-                bottom: '-20px', 
-                fontSize: '11px', 
+              <span style={{
+                position: 'absolute',
+                right: '12px',
+                bottom: '-20px',
+                fontSize: '11px',
                 color: inputMessage.length > 500 ? '#ef4444' : '#e2e8f0',
                 transition: 'color 0.2s'
               }}>
@@ -285,13 +287,13 @@ function Chatbot() {
               </span>
             )}
           </div>
-          <button 
-            type="submit" 
-            className="cb-send-button" 
+          <button
+            type="submit"
+            className="cb-send-button"
             disabled={isLoading || inputMessage.trim().length === 0 || inputMessage.length > 500}
           >
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
             </svg>
           </button>
         </form>

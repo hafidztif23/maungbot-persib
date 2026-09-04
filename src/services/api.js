@@ -148,6 +148,48 @@ export const chatAPI = {
   },
 }
 
+// ============ FSM ADMIN API ============
+
+export const fsmAdminAPI = {
+  listNodes: async () => {
+    return await apiFetch('/admin/fsm/nodes', {
+      method: 'GET',
+    })
+  },
+
+  getNode: async (nodeId) => {
+    return await apiFetch(`/admin/fsm/nodes/${nodeId}`, {
+      method: 'GET',
+    })
+  },
+
+  createNode: async (payload) => {
+    return await apiFetch('/admin/fsm/nodes', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    })
+  },
+
+  updateNode: async (nodeId, payload) => {
+    return await apiFetch(`/admin/fsm/nodes/${nodeId}`, {
+      method: 'PUT',
+      body: JSON.stringify(payload),
+    })
+  },
+
+  deleteNode: async (nodeId) => {
+    return await apiFetch(`/admin/fsm/nodes/${nodeId}`, {
+      method: 'DELETE',
+    })
+  },
+
+  reloadTree: async () => {
+    return await apiFetch('/admin/fsm/reload', {
+      method: 'POST',
+    })
+  },
+}
+
 // ============ TOKEN MANAGEMENT ============
 
 const isLoggedIn = () => {

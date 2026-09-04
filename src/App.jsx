@@ -8,6 +8,7 @@ import LandingPage from './pages/LandingPage'
 import Profile from './pages/Profile'
 import Settings from './pages/Settings'
 import Chatbot from './pages/Chatbot'
+import FsmAdmin from './pages/FsmAdmin'
 import SignUp from './pages/SignUp'
 import Login from './pages/Login'
 
@@ -15,6 +16,8 @@ import './App.css'
 
 function App() {
   const isLoggedIn = tokenManager.isLoggedIn()
+  const currentUser = tokenManager.getUser()
+  const isAdmin = currentUser?.role === 'admin' || currentUser?.email?.includes('admin')
 
   return (
     <AuthProvider>
@@ -39,6 +42,11 @@ function App() {
           <Route 
             path="/chat" 
             element={isLoggedIn ? <Chatbot /> : <Navigate to="/login" replace />} 
+          />
+
+          <Route
+            path="/fsm-admin"
+            element={isLoggedIn && isAdmin ? <FsmAdmin /> : <Navigate to="/chat" replace />}
           />
 
           {/* Fallback Rute */}

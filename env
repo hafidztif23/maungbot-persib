@@ -1,0 +1,8 @@
+INSTANCE_CONNECTION_NAME=maungbot-project:asia-southeast2:maungbot-db
+DB_USER=postgres
+DB_PASSWORD=Pancatakhta5*
+DB_NAME=maungbot
+DATABASE_URL=postgresql+psycopg2://postgres:Pancatakhta5*@/maungbot?host=/cloudsql/maungbot-project:asia-southeast2:maungbot-db
+
+JWT_SECRET_KEY=2aa7f4db2a2da871d5fa383d73ac304621766384e68f2427607f03a78d649a45
+ACCESS_TOKEN_EXPIRE_MINUTES=60

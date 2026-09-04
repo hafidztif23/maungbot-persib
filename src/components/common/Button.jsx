@@ -5,9 +5,10 @@ function Button({
   onClick,
   type = "button",
   className = "",
+  disabled = false,
 }) {
   return (
-    <button type={type} onClick={onClick} className={`app-button ${className}`} >
+    <button type={type} onClick={onClick} className={`app-button ${className}`} disabled={disabled}>
       {children}
     </button>
   );

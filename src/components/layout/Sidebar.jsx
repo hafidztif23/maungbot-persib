@@ -1,6 +1,7 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { getTranslation } from "../../utils/translation";
+import PersibLogo from "../../image/Logo_Persib_Bandung.png";
 import "../Chatbot.css";
 
 function Sidebar({ isOpen, setIsOpen }) {
@@ -8,6 +9,7 @@ function Sidebar({ isOpen, setIsOpen }) {
   const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname;
+  const isAdmin = user?.role === "admin" || user?.email?.includes("admin");
 
   // Ambil kamus terjemahan berdasarkan preferensi user
   const t = getTranslation(user?.referensi_bahasa);
@@ -19,7 +21,9 @@ function Sidebar({ isOpen, setIsOpen }) {
   return (
     <aside className={`cb-sidebar sidebar ${isOpen ? 'open' : ''}`}>
       <div className="cb-sidebar-header">
-        <div className="cb-bot-icon">🤖</div>
+        <div className="cb-bot-icon">
+          <img src={PersibLogo} alt="Persib Logo" className="cb-bot-logo-img" />
+        </div>
         <div className="cb-bot-title">
           <h3>MAUNG BOT</h3>
           <p>Powered by AI</p>
@@ -49,11 +53,17 @@ function Sidebar({ isOpen, setIsOpen }) {
         <Link to="/profile" className={`cb-menu-item ${currentPath === '/profile' ? 'active' : ''}`} onClick={() => setIsOpen(false)}>
           👤 {t.edit_profil}
         </Link>
-        
+
         <h4>{t.pengaturan_menu}</h4>
         <Link to="/settings" className={`cb-settings-item ${currentPath === '/settings' ? 'active' : ''}`} onClick={() => setIsOpen(false)}>
           <span>⚙️ {t.settings}</span>
         </Link>
+
+        {isAdmin && (
+          <Link to="/fsm-admin" className={`cb-settings-item ${currentPath === '/fsm-admin' ? 'active' : ''}`} onClick={() => setIsOpen(false)}>
+            <span>🧩 FSM Admin</span>
+          </Link>
+        )}
       </div>
 
       <button className="cb-logout-btn" onClick={handleLogout}>{t.logout}</button>

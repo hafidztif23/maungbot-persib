@@ -23,8 +23,8 @@
   flex-direction: column;
   overflow: hidden;
   background: radial-gradient(circle at 80% 10%, rgba(37, 99, 235, 0.12), transparent 45%),
-              radial-gradient(circle at 15% 85%, rgba(79, 70, 229, 0.08), transparent 45%),
-              #0A0F1C;
+    radial-gradient(circle at 15% 85%, rgba(79, 70, 229, 0.08), transparent 45%),
+    #0A0F1C;
 }
 
 .dashboard-main {
@@ -32,18 +32,19 @@
   overflow-y: auto;
   padding: 24px;
 }
+
 /* ==================== RESPONSIVE ==================== */
 @media (max-width: 1024px) {
-  .topbar-left { 
-    display: flex; 
+  .topbar-left {
+    display: flex;
   }
-  
+
   .sidebar {
     position: fixed;
     left: -280px;
     top: 0;
     z-index: 100;
-    box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3);
   }
 
   .sidebar.open {
@@ -52,8 +53,8 @@
 }
 
 @media (max-width: 768px) {
-  .dashboard-main { 
-    padding: 16px; 
+  .dashboard-main {
+    padding: 16px;
   }
 }
 
